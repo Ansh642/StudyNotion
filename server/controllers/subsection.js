@@ -7,13 +7,10 @@ require("dotenv").config();
 exports.createSubSection= async(req,res)=>{
     try
     {
-        //console.log("object");
 
         const {sectionId, title, timeDuration,description} = req.body;
         const videoUrl = req.files.videoUrl;
 
-        //console.log("jfdsfjdefj");
-        //console.log(videoUrl);
 
         if(!sectionId || !title || !timeDuration || !description || !videoUrl){
             return res.status(400).json({
@@ -22,17 +19,14 @@ exports.createSubSection= async(req,res)=>{
             });
         }
 
-        //console.log("object");
         const uploadVideo = await uploadImageToCloudinary(videoUrl,process.env.FOLDER_NAME);
         
-        //console.log(uploadVideo);
+       
 
         // create sub section
         const subSectionDetails = await Subsection.create({
             title, timeDuration, description, videoUrl : uploadVideo.secure_url,
         });
-
-        //console.log(subSectionDetails);
 
         // update section
         const updatedSection = await Section.findByIdAndUpdate({ _id:sectionId},{
@@ -84,8 +78,6 @@ exports.updateSubSection = async(req,res)=>{
     });
 }
 
-
-//HW LEFT
 exports.deleteSubSection= async(req,res)=>{
 
     try{
