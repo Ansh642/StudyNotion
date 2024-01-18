@@ -59,8 +59,8 @@ exports.updateSection= async(req,res)=>{
 }
 
 exports.deleteSection=async(req,res)=>{
-
-    const {sectionId}=req.body;
+    try{
+        const {sectionId}=req.body;
 
     const section = await Section.findByIdAndDelete(sectionId);
 
@@ -68,6 +68,13 @@ exports.deleteSection=async(req,res)=>{
         success : true,
         message:'Section deleted successfully',
     });
+    }
+    catch(err){
+        return res.status(500).json({
+            success : false,
+            message: err.message
+        });
+    }
 }
 
 
