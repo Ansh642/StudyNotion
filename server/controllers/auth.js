@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Otp = require('../models/Otp');
 const JWT = require('jsonwebtoken');
 require("dotenv").config();
+const mailsend = require("../utils/mailsend");
  
 
 // create a otp and save it to the database
@@ -328,6 +329,32 @@ exports.resetPassword = async(req,res)=>{
     });
 }
 
+    catch(err){
+        return res.json({
+            success:false,
+            message: 'Error updating password',
+        });
+    }
+}
+
+
+exports.contactUs = async (req,res)=>{
+    try{
+       const userId = req.user.id;
+
+       const {firstName,lastName,email,phoneNo , message} = req.body;
+       
+       if(!firstName || !lastName || !email || !phoneNo || !message){
+        return res.json({
+            success : false,
+            message: 'Enter complete details',
+        });
+       }
+
+       const emailResponse = await mailsend(email, "E-mail for query" , message);
+
+       console.log("Email sent successfully:", emailResponse.response);
+    }
     catch(err){
         return res.json({
             success:false,

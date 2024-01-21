@@ -55,16 +55,29 @@ exports.categoryPageDetails = async (req,res)=>{
     try{
     const {categoryId} = req.body;
 
-    const allCourse = Course.findById(categoryId).populate({
-        path:"Course",
-        courseName: true,
-        courseDescription: true,
-    });
+    const allCourse = Course.findById(categoryId).populate("Course").exec();
+    
+    if(!allCourse){
+        return res.status(400).json({
+            success: false,
+            message: 'No courses found for particular category',
+        });
+    }
+
+    // get courses from different categories
+    const otherCourses = await Course.find({
+        _id : {$ne : categoryId},
+    }).populate("Course").exec();
+
+
+    // get all top selling courses
+    const topCourses = Course.find({}).sort({studentsEnrolled : -1}).limit(10);
 
     return res.status(200).json({
         success: true,
         message: 'All courses fetched successfully',
     });
+
   }
    catch(err){
     return res.status(500).json({

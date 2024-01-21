@@ -4,6 +4,7 @@ const User = require('../models/user');
 const Course = require('../models/course');
 const mailsend = require('../utils/mailsend');
 const {courseEnrollmentEmail} = require('../templates/courseEnrollmentEmail');
+const { default: mongoose } = require("mongoose")
 
 
 exports.capturePayment =async(req,res)=>{
@@ -36,7 +37,7 @@ exports.capturePayment =async(req,res)=>{
 
     const uid= new mongoose.Types.ObjectId(studentId);
 
-    if(Course.studentsEnrolled.includes(uid))
+    if(course.studentsEnrolled.includes(uid))
     {
       return res.json({
         success: false,
