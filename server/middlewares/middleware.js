@@ -7,14 +7,13 @@ require("dotenv").config();
 exports.auth = async (req, res, next) => {
     try{
         //extract token
-        //console.log("object");
+        const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer", "");
 
-        const token = req.cookies.token || req.body.token || req.header("Authorisation").replace("Bearer ", "");
-
+        //console.log(token);
         if(!token) {
             return res.status(401).json({
                 success:false,
-                message:'TOken is missing',
+                message:'Token is missing',
             });
         }
 
@@ -97,7 +96,6 @@ exports.isAdmin=(req, res,next)=>{
     try
     {
         const accountType = req.user.accountType;
-        console.log(accountType);
 
         if(accountType !== "admin")
         {

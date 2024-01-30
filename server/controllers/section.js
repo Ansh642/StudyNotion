@@ -60,11 +60,15 @@ exports.updateSection= async(req,res)=>{
 
 exports.deleteSection=async(req,res)=>{
     try{
-    const {sectionId}=req.body;
+    const {sectionId,courseId}=req.body;
 
     const section = await Section.findByIdAndDelete(sectionId);
 
-    const updatedCourse = await Course.findByIdAndDelete(sectionId);
+    const updatedCourse = await Course.findByIdAndUpdate(courseId,{
+        $pull :{
+            courseContent : sectionId,      
+        }
+    });
 
     return res.status(200).json({
         success : true,

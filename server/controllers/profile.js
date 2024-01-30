@@ -4,77 +4,80 @@ const Course = require('../models/course');
 
 
 //update profile
-exports.updateProfile = async(req,res)=>{
-  
-    try{
-      const {gender,dateOfBirth="",about="",contactNumber} = req.body;
-      const id = req.user.id;
-  
-      const userDetails = await User.findById(id);    
+exports.updateProfile = async (req, res) => {
+	try {
+		const { dateOfBirth = "", about = "", contactNumber , gender} = req.body;
+		const id = req.user.id;
+
+    //console.log(gender);
+
+		// Find the profile by id
+		const userDetails = await User.findById(id);
+		const profile = await Profile.findById(userDetails.additionalDetails);
+
+		// Update the profile fields
+		profile.dateOfBirth = dateOfBirth;
+		profile.about = about;
+		profile.contactNumber = contactNumber;
+    profile.gender = gender;
+
+		await profile.save();
+
+		return res.json({
+			success: true,
+			message: "Profile updated successfully",
+			profile,
+		});
+
+	} 
+  catch (error) {
+		return res.status(500).json({
+			success: false,
+			error: error.message,
+		});
+	}
+};
+
+
+exports.deleteAccount = async(req,res)=>{
+  try{
+      const userId = req.user.id;
+
+      const userDetails = await User.findById(userId);
+
+      if(!userDetails)
+      {
+          return res.status(500).json({
+              success: false,
+              message:"No such user exists",
+          });
+      }
+
       const profileId = userDetails.additionalDetails;
-      const profileDetails = await Profile.findById(profileId);
-  
-      profileDetails.gender = gender;
-      profileDetails.dateOfBirth = dateOfBirth;
-      profileDetails.about = about;
-      profileDetails.contactNumber = contactNumber;
-  
-      await profileDetails.save();
-  
+      await Profile.findByIdAndDelete(profileId);
+
+      // unenroll user from all courses
+      const courseDetails = await Course.findByIdAndUpdate(userId,{
+          $pull:{
+            studentsEnrolled: userId,
+          }
+      });
+
+      await User.findByIdAndDelete(userId);
+
       return res.status(200).json({
-        success : true,
-        message:' Profile updated successfully',
-        profileDetails,
-    });
-  
-    }
+          success: true,
+          message:"User deleted successfully",
+      });
+  }   
     catch(err){
       return res.status(500).json({
         success: false,
-        message:"An error occurred while updating profile information",
-    });
-  }
-}
-
-exports.deleteProfile = async(req,res)=>{
-    try{
-        const userId = req.user.id;
-
-        const userDetails = await User.findById(userId);
-
-        if(!userDetails)
-        {
-            return res.status(500).json({
-                success: false,
-                message:"No such user exists",
-            });
-        }
-
-        const profileId = userDetails.additionalDetails;
-        await Profile.findByIdAndDelete(profileId);
-
-        // unenroll user from all courses
-        const courseDetails = await Course.findByIdAndUpdate(userId,{
-            $pull:{
-                studentsEnrolled: userId,
-            }
-        });
-
-        
-        await User.findByIdAndDelete(userId);
-
-        return res.status(200).json({
-            success: true,
-            message:"User deleted successfully",
-        });
-    }   
-    catch(err){
-        return res.status(500).json({
-            success: false,
-            message:"An error occurred while deleting profile information",
-        });
+        message:"An error occurred while deleting profile information",
+      });
     } 
 }
+
 
 exports.getAllUserDetails = async (req, res) => {
 	try {
@@ -91,7 +94,8 @@ exports.getAllUserDetails = async (req, res) => {
 			message: "User Data fetched successfully",
 			data: userDetails,
 		});
-	} catch (error) {
+	}
+   catch (error) {
 		return res.status(500).json({
 			success: false,
 			message: error.message,
@@ -157,3 +161,6 @@ exports.getEnrolledCourses = async (req, res) => {
       })
     }
 };
+
+
+

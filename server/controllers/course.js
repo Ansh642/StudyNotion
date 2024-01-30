@@ -1,7 +1,7 @@
 const Course = require('../models/course');
 const User = require('../models/user');
 const Category= require('../models/category');
-const uploadImageToCloudinary = require('../utils/imageUpload');
+const {uploadImageToCloudinary} = require('../utils/imageUpload');
 require("dotenv").config();
 
 
@@ -10,7 +10,8 @@ exports.createCourse = async(req,res)=>{
     const {courseName, courseDescription,whatwillyoulearn,price,category } = req.body;
     const thumbnail = req.files.image;
 
-    const {userId} = req.user.id;
+    const userId = req.user.id;
+    console.log(userId);
 
     if(!courseDescription  || !courseName || !whatwillyoulearn || !price || !category)
     {
@@ -65,13 +66,14 @@ exports.createCourse = async(req,res)=>{
         }
     });
 
-    return res.status.json({
+    return res.status(200).json({
         success: true,
         message: 'Course created successfully',
+        newCourse
     });
   }
     catch (err) {
-        return res.status.json({
+        return res.status(500).json({
             success: false,
             message: err.message,
         });

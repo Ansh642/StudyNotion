@@ -1,10 +1,12 @@
 const Category = require("../models/category");
 const Course = require("../models/course");
 
+
 exports.createCategory = async(req,res)=>{
     try{
-        const {name,description} = req.body;
-
+    const {name,description} = req.body;
+    console.log(name);
+    
     if(!description || !name){
         return res.status(400).json({
             success: false,
@@ -27,6 +29,7 @@ exports.createCategory = async(req,res)=>{
         });
     }
 }
+
 
 exports.showAllCategories=async(req,res)=>{
     try{

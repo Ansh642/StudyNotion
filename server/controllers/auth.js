@@ -2,11 +2,14 @@ const User = require('../models/user');
 const Otp = require('../models/Otp');
 const JWT = require('jsonwebtoken');
 require("dotenv").config();
-const mailsend = require("../utils/mailsend");
- 
+const {mailsend} = require("../utils/mailsend");
+const otpGenerator = require("otp-generator");
+const bcrypt = require("bcrypt");
+const Profile = require("../models/profile");
+const crypto = require("crypto");
 
 // create a otp and save it to the database
-exports.otp = async(req, res)=>{
+exports.sendotp = async(req, res)=>{
     try
     {
     const {email} = req.body;
@@ -29,13 +32,15 @@ exports.otp = async(req, res)=>{
         });
     }
 
-    let otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+    let otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false, });
 
     // save otp in db
     const OtpDetails = await Otp.create({
         email:email,
         otp:otp,
     });
+
+    //console.log(otp);
 
     return res.status(200).json({
         success: true,
@@ -53,11 +58,13 @@ exports.otp = async(req, res)=>{
     }
 }
 
+
 exports.signup = async(req,res)=>{
     try{
        const {firstName,lastName,email,password,confirmPassword, accountType,otp} = req.body;
-       
-       if(!firstName || !lastName || !email || !password || !confirmPassword || !otp)
+       newOtp =  otp.join('');
+
+       if(!firstName || !lastName || !email || !password || !confirmPassword || !newOtp)
        {
         return res.status(400).json({
            success: false,
@@ -84,9 +91,10 @@ exports.signup = async(req,res)=>{
        }
 
        // check for valid otp
-       const OtpDetails = Otp.find({email}).sort({createdAt:-1}).limit(1);
+       const OtpDetails = await Otp.find({ email }).sort({ createdAt: -1 }).limit(1);
 
-       if(!OtpDetails || OtpDetails.otp!== otp)
+       //console.log(OtpDetails[0].otp);
+       if(!OtpDetails || OtpDetails[0].otp!== newOtp)
        {
           return res.status(400).json({
             success: false,
@@ -94,7 +102,7 @@ exports.signup = async(req,res)=>{
           });
        }
 
-       const hashedPassword = bcrypt.hash(password,10);
+       const hashedPassword = await bcrypt.hash(password,10);
        
        const profileDetails = await Profile.create({
         gender: null,
@@ -108,7 +116,6 @@ exports.signup = async(req,res)=>{
         firstName,
         lastName,
         email,
-        //contactNo,
         accountType,
         password : hashedPassword,
         additionalDetails : profileDetails._id,
@@ -131,6 +138,7 @@ exports.signup = async(req,res)=>{
     }
 }
 
+
 exports.login =async(req,res)=>{
     try{
       const {email,password} = req.body;
@@ -144,6 +152,7 @@ exports.login =async(req,res)=>{
       }
 
       const userDetails = await User.findOne({email});
+      //console.log(userDetails);
 
       if(!userDetails)
       {
@@ -153,34 +162,31 @@ exports.login =async(req,res)=>{
         })
       }
 
-      if(await bcrypt.compare(password, userDetails.password))
-      {
-        const payload={
-            accountType : userDetails.accountType,
-            id: userDetails._id,
-            email:userDetails.email,
-        }
-
-        //create a token it returns a string 
-        const token = JWT.sign(payload, process.env.JWT_SECRET, {
-            expiresIn: "1d",
-        });
-
+      if (await bcrypt.compare(password, userDetails.password)) {
+        const token = JWT.sign(
+            { email: userDetails.email, id: userDetails._id, accountType: userDetails.accountType },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "24h",
+            }
+        );
+ 
+        userDetails.password = null;
         return res.status(200).json({
             success: true,
             message: "Logged in successfully",
-            token,
             userDetails,
-        });
-    }
-    else
-    {
-        return res.status({
+            token
+        })
+
+    
+    } else {
+        return res.status(401).json({
             success: false,
-            message: "Password is incorrect",
+            message: `Password is incorrect`,
         });
     }
- }
+  }
     catch(err)
     {
         return res.status(500).json({
@@ -189,6 +195,7 @@ exports.login =async(req,res)=>{
         });
     }
 }
+
 
 exports.changePassword = async(req,res)=>{
     try
@@ -242,6 +249,7 @@ exports.changePassword = async(req,res)=>{
     }
 }
 
+
 exports.resetPasswordToken= async(req,res)=>{
 
     try{
@@ -258,7 +266,6 @@ exports.resetPasswordToken= async(req,res)=>{
 
     // generate a random token 
     const token = crypto.randomUUID();
-    console.log(token);
 
     const updatedDetails = await User.findOneAndUpdate({email},
     {
@@ -266,15 +273,15 @@ exports.resetPasswordToken= async(req,res)=>{
         tokenExpiresIn: Date.now() + 5*60*1000,
     },
     {new:true});
- 
+
     const url= `http://localhost:3000/update-password/${token}`
 
-    await mailsend(email,"Password Mail Link",url);
+    const mail = await mailsend(email,'Password Mail Link',url);
+    //console.log(mail);
 
-    return res.json({
+    return res.status(200).json({
         success:true,
-        message: 'reset link sent successfully',
-        updatedDetails,
+        message: 'Reset link sent successfully,check your email',
     });
 }
 
@@ -287,10 +294,12 @@ exports.resetPasswordToken= async(req,res)=>{
     }
 }
 
+
 exports.resetPassword = async(req,res)=>{
 
     try{
     const {password,confirmPassword,token} = req.body;
+    //console.log(password);
 
     if(password!==confirmPassword)
     {
@@ -301,6 +310,7 @@ exports.resetPassword = async(req,res)=>{
     }
 
     const userDetails = await User.findOne({token:token});
+    //console.log(userDetails);
 
     if(!userDetails)
     {
@@ -319,15 +329,16 @@ exports.resetPassword = async(req,res)=>{
     }
 
     const hashedPassword = await bcrypt.hash(password,10);
-    console.log(hashedPassword);
+    //console.log(hashedPassword);
     
-    await User.findOneAndUpdate({token:token, password:hashedPassword});
+    const newUserDetails = await User.findOneAndUpdate({token:token}, {password:hashedPassword},{new:true});
+    console.log(newUserDetails);
 
-    return res.json({
+    return res.status(200).json({
         success:true,
         message: 'Password updated successfully',
     });
-}
+ }
 
     catch(err){
         return res.json({
@@ -337,14 +348,15 @@ exports.resetPassword = async(req,res)=>{
     }
 }
 
-
+// incomplete
 exports.contactUs = async (req,res)=>{
     try{
-       const userId = req.user.id;
+       //const userId = req.user.id;
+       console.log("object")
 
        const {firstName,lastName,email,phoneNo , message} = req.body;
        
-       if(!firstName || !lastName || !email || !phoneNo || !message){
+       if(!firstName || !lastName || !email || !message){
         return res.json({
             success : false,
             message: 'Enter complete details',
@@ -358,8 +370,14 @@ exports.contactUs = async (req,res)=>{
     catch(err){
         return res.json({
             success:false,
-            message: 'Error updating password',
+            message: 'Error  sending mail',
         });
     }
 }
+
+
+
+
+
+
 

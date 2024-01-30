@@ -81,7 +81,7 @@ exports.getAllRating = async(req,res)=>{
 }
 
 
-exports.getAvgRating = async(req,res)=>{
+exports.getAverageRating = async(req,res)=>{
     try{
         const {courseId}= req.body;
 
@@ -116,7 +116,7 @@ exports.getAvgRating = async(req,res)=>{
 }
 
 
-exports.getAllRatings = async (req,res)=>{
+exports.getAllRatingReview = async (req,res)=>{
     try{
 
     const {courseId}= req.body;
