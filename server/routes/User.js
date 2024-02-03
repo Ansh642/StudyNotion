@@ -14,7 +14,7 @@ const {
 } = require("../controllers/auth")
 
 
-const { auth } = require("../middlewares/middleware");
+const { auth, isAdmin } = require("../middlewares/middleware");
 
 // Routes for Login, Signup, and Authentication
 
@@ -45,6 +45,15 @@ router.post("/reset-password-token", resetPasswordToken)
 router.post("/reset-password", resetPassword)
 
 router.post("/contact-us",contactUs);
+
+
+router.get("/user-auth", auth, (req, res) => {
+  res.status(200).send({ ok: true });
+});
+
+router.get("/admin-auth", auth,isAdmin, (req, res) => {
+  res.status(200).send({ ok: true });
+});
 
 // Export the router for use in the main application
 module.exports = router

@@ -9,6 +9,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import ResetPass from "./pages/ResetPass";
 import ChangePass from "./pages/ChangePass";
 import About from "./pages/About";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail/>}/>
         <Route path="/reset-password" element={<ResetPass/>}/>
         <Route path="/update-password/:id" element={<ChangePass/>}/>
+        <Route path="/contact" element={<ContactUs/>}/>
       </Routes>
       
     </div>

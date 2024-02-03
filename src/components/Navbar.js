@@ -57,6 +57,7 @@ export default function Navbar() {
 
     <div className=' flex flex-row items-center justify-center border-b-[1px] border-richblack-700 px-3 py-2'>
       <div className='w-[80%] flex flex-row items-center justify-between'>
+
         <Link to='/'>
           <img src={logo} alt="" width={160} height={42} loading='lazy'/>
         </Link>
@@ -100,47 +101,78 @@ export default function Navbar() {
         </div>
 
         <div className='flex flex-row gap-4 items-center'>
-        {
-          auth.token && auth.user.accountType !== "Instructor" ? (<>
-
-          <CiSearch className='text-white cursor-pointer' />
-
-          <Link to='/dashboard/cart' className='text-white relative'>
-            <FiShoppingBag />
-            <p className='absolute -top-3 left-3'>{cart?.length}</p>
-          </Link>
-
-          <nav className="bg-gray-800">
-          <div className="flex items-center justify-between"  onClick={()=>setshow(!show)}>
-            <div className="flex items-center cursor-pointer"  >
-             
-              <img
-                src={auth.user.image}  
-                alt=""
-                className="rounded-full h-6 w-6 object-contain"
-                onClick={()=>setshow(true)}
-              />
+          {
+            auth.token ? (<>
+            {
+              auth.user.accountType === "student" ? 
               
-            </div>
-          </div>
-          
-          <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show===true ? `visible` : `invisible`}`}>
-            <p className='text-white hover:text-yellow-25 ml-1 mt-1'>Dashboard</p>
-            <p className='text-white hover:text-yellow-25 ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
-          </div>
-          </nav>
-          
-          </>) : 
-          (<>
-            <div className='flex flex-row gap-3'>
+              (<>
+                
+                <CiSearch className='text-white cursor-pointer' />
 
-            <button onClick={()=>navigate("/login")} className='bg-richblack-700 text-richblack-5 hover:bg-richblack-800 transition-all duration-200 rounded-lg px-2 py-1'>Log In</button>
-            <button  onClick={()=>navigate("/signup")} className='bg-richblack-700 text-richblack-5 hover:bg-richblack-800 transition-all duration-200 rounded-lg px-2 py-1'>Sign Up</button>
+                <Link to='/dashboard/cart' className='text-white relative'>
+                  <FiShoppingBag />
+                  <p className='absolute -top-3 left-3'>{cart?.length}</p>
+                </Link>
 
-            </div>
+                <nav className="bg-gray-800">
+                <div className="flex items-center justify-between"  onClick={()=>setshow(!show)}>
+                  <div className="flex items-center cursor-pointer"  >
+                  
+                    <img
+                      src={auth.user.image}  
+                      alt=""
+                      className="rounded-full h-6 w-6 object-contain"
+                      onClick={()=>setshow(true)}
+                    />
+                    
+                  </div>
+                </div>
 
-          </>)
-        }
+                <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show===true ? `visible` : `invisible`}`}>
+                  <p className='text-white hover:text-yellow-25 ml-1 mt-1'>Dashboard</p>
+                  <p className='text-white hover:text-yellow-25 ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
+                </div>
+                </nav>
+
+              </>) :
+                
+              (<>
+
+              <nav className="bg-gray-800 mr-20">
+              <div className="flex items-center justify-between"  onClick={()=>setshow(!show)}>
+                <div className="flex items-center cursor-pointer"  >
+                
+                  <img
+                    src={auth.user.image}  
+                    alt=""
+                    className="rounded-full h-6 w-6 object-contain"
+                    onClick={()=>setshow(true)}
+                  />
+                  
+                </div>
+              </div>
+
+              <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show===true ? `visible` : `invisible`}`}>
+                <p className='text-white hover:text-yellow-25 ml-1 mt-1'>Dashboard</p>
+                <p className='text-white hover:text-yellow-25 ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
+              </div>
+              </nav>
+
+              </>)
+            }
+
+            </>) :
+            
+            (<>
+              <div className='flex flex-row gap-3'>
+
+              <button onClick={()=>navigate("/login")} className='bg-richblack-700 text-richblack-5 hover:bg-richblack-800 transition-all duration-200 rounded-lg px-2 py-1'>Log In</button>
+              <button  onClick={()=>navigate("/signup")} className='bg-richblack-700 text-richblack-5 hover:bg-richblack-800 transition-all duration-200 rounded-lg px-2 py-1'>Sign Up</button>
+
+              </div>
+            </>)
+          }
         </div>
 
 
@@ -149,9 +181,3 @@ export default function Navbar() {
     </div>
   )
 }
-
-
-
- 
-
-

@@ -21,7 +21,7 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
   })
-  
+       
   const { firstName, lastName, email, phoneNo, password, confirmPassword } = formData;
 
   const handleOnChange = (e) => {
@@ -98,7 +98,7 @@ export default function Signup() {
           countryCode.map( (ele,index) => {
             return (
               <option key={index} >
-                <p>{ele.code}</p>
+                <p>{ele.code} - {ele.country}</p>
               </option>
             )}
             )}
