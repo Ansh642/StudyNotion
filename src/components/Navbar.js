@@ -123,14 +123,14 @@ export default function Navbar() {
                       src={auth.user.image}  
                       alt=""
                       className="rounded-full h-6 w-6 object-contain"
-                      onClick={()=>setshow(true)}
+                      onClick={()=>setshow(!show)}
                     />
                     
                   </div>
                 </div>
 
                 <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show===true ? `visible` : `invisible`}`}>
-                  <p className='text-white hover:text-yellow-25 ml-1 mt-1'>Dashboard</p>
+                  <p className='text-white hover:text-yellow-25 ml-1 mt-1' onClick={()=>{navigate('/dashboard/my-profile');setshow(!show)}}>Dashboard</p>
                   <p className='text-white hover:text-yellow-25 ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
                 </div>
                 </nav>
@@ -154,7 +154,7 @@ export default function Navbar() {
               </div>
 
               <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show===true ? `visible` : `invisible`}`}>
-                <p className='text-white hover:text-yellow-25 ml-1 mt-1'>Dashboard</p>
+                <p className='text-white hover:text-yellow-25 ml-1 mt-1' onClick={()=>{navigate('/dashboard/instructor-profile');setshow(!show)}}>Dashboard</p>
                 <p className='text-white hover:text-yellow-25 ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
               </div>
               </nav>
@@ -181,3 +181,7 @@ export default function Navbar() {
     </div>
   )
 }
+
+
+
+

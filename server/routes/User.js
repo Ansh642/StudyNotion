@@ -14,7 +14,7 @@ const {
 } = require("../controllers/auth")
 
 
-const { auth, isAdmin } = require("../middlewares/middleware");
+const { auth, isAdmin, isInstructor } = require("../middlewares/middleware");
 
 // Routes for Login, Signup, and Authentication
 
@@ -51,7 +51,7 @@ router.get("/user-auth", auth, (req, res) => {
   res.status(200).send({ ok: true });
 });
 
-router.get("/admin-auth", auth,isAdmin, (req, res) => {
+router.get("/instructor-auth", auth,isInstructor, (req, res) => {
   res.status(200).send({ ok: true });
 });
 
