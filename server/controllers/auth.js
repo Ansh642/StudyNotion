@@ -151,7 +151,7 @@ exports.login =async(req,res)=>{
         });
       }
 
-      const userDetails = await User.findOne({email});
+      const userDetails = await User.findOne({email}).populate("additionalDetails").exec();
       //console.log(userDetails);
 
       if(!userDetails)

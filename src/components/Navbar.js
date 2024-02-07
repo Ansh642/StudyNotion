@@ -36,6 +36,7 @@ export default function Navbar() {
 
   useEffect ( ()=>{
     fetchCategories();
+    setshow(false);
   },[])
 
   function logoutHandler(e)
@@ -56,6 +57,7 @@ export default function Navbar() {
   return (
 
     <div className=' flex flex-row items-center justify-center border-b-[1px] border-richblack-700 px-3 py-2'>
+      
       <div className='w-[80%] flex flex-row items-center justify-between'>
 
         <Link to='/'>
@@ -130,8 +132,8 @@ export default function Navbar() {
                 </div>
 
                 <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show===true ? `visible` : `invisible`}`}>
-                  <p className='text-white hover:text-yellow-25 ml-1 mt-1' onClick={()=>{navigate('/dashboard/my-profile');setshow(!show)}}>Dashboard</p>
-                  <p className='text-white hover:text-yellow-25 ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
+                  <p className='text-white cursor-pointer hover:text-yellow-25 ml-1 mt-1' onClick={()=>{navigate('/dashboard/my-profile');setshow(!show)}}>Dashboard</p>
+                  <p className='text-white hover:text-yellow-25 cursor-pointer ml-1 mt-[0.5px]' onClick={logoutHandler}>Log out</p>
                 </div>
                 </nav>
 

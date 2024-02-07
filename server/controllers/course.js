@@ -91,11 +91,19 @@ exports.getAllCourses = async(req,res)=>{
             instructor:true,
             studentsEnrolled:true,
         }).populate("instructor").exec();
+
+        //console.log(allCourses);
+
+        return res.status(200).json({
+            success: true,
+            message: "All courses have been fetched successfully",
+            allCourses,
+        });
     }
     catch(err){
         return res.status(500).json({
             success : false,
-            message : 'Error in creating new Course',
+            message : 'Error in finding all Courses',
         });
     }
 }
@@ -137,7 +145,4 @@ exports.getCourseDetails = async(req,res)=>{
         });
     }
 }
-
-
-
 

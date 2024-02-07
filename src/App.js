@@ -11,6 +11,8 @@ import ChangePass from "./pages/ChangePass";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
 import Profile from '../src/pages/user/Profile'
+import EnrolledCourses from '../src/pages/user/EnrolledCourses'
+import Settings from '../src/pages/user/Settings'
 import InstructorProfile from "./pages/instructor/Profile";
 import Private from "./pages/user/Private";
 import InstructorPrivate from "./pages/instructor/Private";
@@ -33,6 +35,8 @@ function App() {
 
         <Route path="/dashboard" element={<Private/>}>
           <Route path="my-profile" element={<Profile/>} />
+          <Route path="enrolled-courses" element={<EnrolledCourses/>} />
+          <Route path="user-settings" element={<Settings/>} />
         </Route>
 
         <Route path="/dashboard" element={<InstructorPrivate/>}>
