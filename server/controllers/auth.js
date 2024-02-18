@@ -162,14 +162,20 @@ exports.login =async(req,res)=>{
         })
       }
 
-      if (await bcrypt.compare(password, userDetails.password)) {
-        const token = JWT.sign(
-            { email: userDetails.email, id: userDetails._id, accountType: userDetails.accountType },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "24h",
-            }
-        );
+
+
+      if (await bcrypt.compare(password, userDetails.password))
+       {
+        const payload={
+            email: userDetails.email,
+            id: userDetails._id,
+            accountType: userDetails.accountType
+        }
+
+        //create a token it returns a string 
+        const token = JWT.sign(payload, process.env.JWT_SECRET, {
+            expiresIn: "1d",
+        });
  
         userDetails.password = null;
         return res.status(200).json({

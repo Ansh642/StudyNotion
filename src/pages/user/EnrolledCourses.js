@@ -1,15 +1,35 @@
-import React, { useContext,useState } from 'react'
+import React, { useContext,useEffect,useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/context';
-
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function Profile() {
 
   const {auth,setauth} = useContext(AppContext);
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
-  const [select, setselect] = useState("All");
+  const [data, setdata] = useState();
+  const [course, setcourse] = useState('All');
+
+  const fetchData = async()=>{
+    try{
+
+      const { data } = await axios.get("/api/v1/course/getAllCourses");
+      //console.log(data.allCourses);
+      setdata(data.allCourses);
+
+    }
+    catch(err)
+    {
+      console.log(err.message);
+    }
+  }
+
+
+  useEffect( ()=>{
+    fetchData();
+  },[]);
 
 
   function logoutfunction(e)
@@ -66,13 +86,25 @@ export default function Profile() {
 
       {/* My Profile Section */}
       <div className={`flex ml-32 w-[60%] flex-col gap-5 py-4 px-5 place-items-start ${show===true ? `opacity-20` : ``}`}>
-        <p className='text-3xl text-richblack-25'>Enrolled Courses</p>
+        <p className='text-3xl text-richblack-25 hover:text-white'>Enrolled Courses</p>
         
-        <div className='flex flex-row gap-6 cursor-pointer bg-richblack-800 text-richblack-400 px-5 py-2 rounded-full'>
-          <p>All</p>
-          <p>Pending</p>
-          <p>Completed</p>
+        <div className={`flex flex-row gap-6 cursor-pointer bg-richblack-800  px-5 py-2 rounded-full`}>
+          <p className={`${course==='All' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('All')}}>All</p>
+          <p className={`${course==='Pending' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('Pending')}}>Pending</p>
+          <p className={`${course==='Completed' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('Completed')}}>Completed</p>
         </div>
+
+        <div>
+          {
+            data?.map( (index,ele)=>{
+              return(
+                <div key={index}>{ele.courseName}</div>
+              )
+            })
+          }
+        </div>
+
+
       </div>
 
       {/* Log out tab */}
@@ -94,8 +126,5 @@ export default function Profile() {
     </div>
   )
 }
-
-
-
 
 

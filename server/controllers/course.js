@@ -4,7 +4,7 @@ const Category= require('../models/category');
 const {uploadImageToCloudinary} = require('../utils/imageUpload');
 require("dotenv").config();
 
-
+// create course
 exports.createCourse = async(req,res)=>{
     try{
     const {courseName, courseDescription,whatwillyoulearn,price,category } = req.body;
@@ -80,7 +80,9 @@ exports.createCourse = async(req,res)=>{
     }
 }
 
+// fetch all courses
 exports.getAllCourses = async(req,res)=>{
+    
     try
     {
         const allCourses = await Course.find({},{
@@ -92,7 +94,13 @@ exports.getAllCourses = async(req,res)=>{
             studentsEnrolled:true,
         }).populate("instructor").exec();
 
-        //console.log(allCourses);
+        if(!allCourses)
+        {
+            return res.status(404).json({
+                success : false,
+                message : 'Error in getting all Course details',
+            });
+        }
 
         return res.status(200).json({
             success: true,
@@ -108,6 +116,7 @@ exports.getAllCourses = async(req,res)=>{
     }
 }
 
+//particular course Details
 exports.getCourseDetails = async(req,res)=>{
     try
     {
@@ -142,6 +151,37 @@ exports.getCourseDetails = async(req,res)=>{
         return res.status(500).json({
             success:false,
             message: "Error in getting all Course details",
+        });
+    }
+}
+
+// Get all Registered Courses of a student
+exports.studentCourses = async(req,res)=>{
+    try{
+        
+        const userId = req.user.id;
+        const allCourseDetails = await User.findOne({_id:userId}).populate("courses").exec();
+        
+        if(!allCourseDetails)
+        {
+            return res.status(400).json({
+                success:false,
+                message: "No Courses found",
+            });
+        }
+
+        return res.status(200).json({
+            success:true,
+            message: " Courses fetched successfully",
+            allCourseDetails,
+        });
+
+    }
+    catch(err)
+    {
+        return res.status(500).json({
+            success:false,
+            message: "Error in getting student courses ",
         });
     }
 }
