@@ -11,7 +11,7 @@ import { CartProvider } from "./context/Cart";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-  <React.StrictMode>
+  
     <AuthProvider>
       <CartProvider>
     <BrowserRouter>
@@ -19,7 +19,7 @@ root.render(
     </BrowserRouter>
     </CartProvider>
     </AuthProvider>
-  </React.StrictMode>
+  
    <ToastContainer />
    </>
 );

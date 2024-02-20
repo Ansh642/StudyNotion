@@ -3,23 +3,25 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/context';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { Line, Circle } from 'rc-progress';
 
 export default function Profile() {
 
   const {auth,setauth} = useContext(AppContext);
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
-  const [courses, setcourses] = useState();
+  const [courses, setcourses] = useState([]);
   const [course, setcourse] = useState('All');
 
 
   const fetchData = async()=>{
     try{
 
-      const { data } = await axios.get("/api/v1/course/getAllStudentCourses");
-      //console.log(data.allCourses);
-      setcourses(data.data);
-      console.log(data.data);
+      const { data } = await axios.post("/api/v1/course/getAllCourses");
+
+      setcourses(data.allCourses);
+      console.log(data.allCourses);
+      console.log("courses",courses);
 
     }
     catch(err)
@@ -28,10 +30,10 @@ export default function Profile() {
     }
   }
 
-
   useEffect( ()=>{
     fetchData();
   },[]);
+  
 
 
   function logoutfunction(e)
@@ -100,12 +102,45 @@ export default function Profile() {
         <div className='bg-richblack-700 w-full h-12 rounded-xl'>
           <div className='text-richblack-100 flex flex-row gap-3 px-2 py-1 items-center mt-2 font-medium'>
             <p className='ml-4'>Course Name</p>
-            <p className='ml-72'>Duration</p>
-            <p className='ml-32'>Progress</p>
+            <p className='ml-64'>Duration</p>
+            <p className='ml-36'>Progress</p>
           </div>
         </div>
 
-        
+        <div className='flex flex-col gap-6'>
+        {
+        courses?.map((course, index) => (
+         <div key={index} className='text-white h-auto w-full flex flex-row items-center px-2'>
+
+           <div className='flex gap-3 w-[90%]'>
+            <img src={course.thumbnail} alt="" className='h-9 w-10 rounded-xl object-contain'/>
+             <div className='flex flex-col text-sm'>
+              <p className='font-semibold'>{course.courseName}</p>
+              <p className='text-xs text-richblack-300'>{course.whatwillyoulearn}</p>
+             </div>
+           </div>
+
+           <div className='text-richblack-300 ml-52 items-start w-[40%]'>
+            2hr 30mins
+           </div>
+ 
+           <div className='ml-36 w-[20%] flex items-center' >
+           <Line percent={60} strokeWidth={7} strokeColor="#D3D3D3" />
+           </div>
+
+           <div>
+           <div className="w-8 h-8 ml-36 rounded-full bg-gray-300 flex flex-col gap-1 cursor-pointer items-center justify-center">
+            {/* Three dots icon */}
+            <div className="w-1 h-1 bg-richblack-300 rounded-full"></div>
+            <div className="w-1 h-1 bg-richblack-300 rounded-full mx-1"></div>
+            <div className="w-1 h-1 bg-richblack-300 rounded-full"></div>
+          </div>
+           </div>
+
+          </div>
+        ))
+        }
+       </div>
 
 
       </div>
@@ -133,15 +168,6 @@ export default function Profile() {
 
 
 
-{/* <div>
-  {
-    courses?.map( (index,ele)=>{
-      return(
-        <div key={index} className='text-white'>{ele.courseName}</div>
-      )
-    })
-  }
-</div> */}
 
 
 

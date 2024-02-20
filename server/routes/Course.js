@@ -75,7 +75,7 @@ router.post("/addSubSection",auth, isInstructor, createSubSection);
 
 
 // Get all Registered Courses
-router.get("/getAllCourses", getAllCourses);
+router.post("/getAllCourses", getAllCourses);
 
 // Get all Registered Courses of a student
 router.get("/getAllStudentCourses",auth, studentCourses);

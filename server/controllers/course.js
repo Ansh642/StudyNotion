@@ -85,14 +85,7 @@ exports.getAllCourses = async(req,res)=>{
     
     try
     {
-        const allCourses = await Course.find({},{
-            courseName:true,
-            price:true,
-            thumbnail:true,
-            ratingAndReviews:true,
-            instructor:true,
-            studentsEnrolled:true,
-        }).populate("instructor").exec();
+        const allCourses = await Course.find({}).populate("instructor").exec();
 
         if(!allCourses)
         {
