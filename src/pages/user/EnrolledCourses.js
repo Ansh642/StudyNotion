@@ -9,15 +9,17 @@ export default function Profile() {
   const {auth,setauth} = useContext(AppContext);
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
-  const [data, setdata] = useState();
+  const [courses, setcourses] = useState();
   const [course, setcourse] = useState('All');
+
 
   const fetchData = async()=>{
     try{
 
-      const { data } = await axios.get("/api/v1/course/getAllCourses");
+      const { data } = await axios.get("/api/v1/course/getAllStudentCourses");
       //console.log(data.allCourses);
-      setdata(data.allCourses);
+      setcourses(data.data);
+      console.log(data.data);
 
     }
     catch(err)
@@ -94,15 +96,16 @@ export default function Profile() {
           <p className={`${course==='Completed' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('Completed')}}>Completed</p>
         </div>
 
-        <div>
-          {
-            data?.map( (index,ele)=>{
-              return(
-                <div key={index}>{ele.courseName}</div>
-              )
-            })
-          }
+
+        <div className='bg-richblack-700 w-full h-12 rounded-xl'>
+          <div className='text-richblack-100 flex flex-row gap-3 px-2 py-1 items-center mt-2 font-medium'>
+            <p className='ml-4'>Course Name</p>
+            <p className='ml-72'>Duration</p>
+            <p className='ml-32'>Progress</p>
+          </div>
         </div>
+
+        
 
 
       </div>
@@ -126,5 +129,19 @@ export default function Profile() {
     </div>
   )
 }
+
+
+
+
+{/* <div>
+  {
+    courses?.map( (index,ele)=>{
+      return(
+        <div key={index} className='text-white'>{ele.courseName}</div>
+      )
+    })
+  }
+</div> */}
+
 
 

@@ -162,7 +162,7 @@ exports.studentCourses = async(req,res)=>{
         const userId = req.user.id;
         const allCourseDetails = await User.findOne({_id:userId}).populate("courses").exec();
         
-        if(!allCourseDetails)
+        if(!allCourseDetails.courses)
         {
             return res.status(400).json({
                 success:false,
@@ -173,7 +173,7 @@ exports.studentCourses = async(req,res)=>{
         return res.status(200).json({
             success:true,
             message: " Courses fetched successfully",
-            allCourseDetails,
+            data : allCourseDetails.courses,
         });
 
     }

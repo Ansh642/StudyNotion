@@ -206,10 +206,10 @@ exports.login =async(req,res)=>{
 exports.changePassword = async(req,res)=>{
     try
     {
-        const {oldPassword,newPassword,confirmPassword} = req.body;
+        const {oldPassword,newPassword} = req.body;
         const userId= req.user.id;
 
-        if(!oldPassword || !newPassword || !confirmPassword)
+        if(!oldPassword || !newPassword )
         {
             return res.status(400).json({
                 success : false,
@@ -218,34 +218,33 @@ exports.changePassword = async(req,res)=>{
         }
 
         const UserDetails = await User.findById(userId);
-
-        const isPasswordMatch = await bcrypt.compare(oldPassword,UserDetails.password);
         
+        const isPasswordMatch = await bcrypt.compare(oldPassword,UserDetails.password);
+
 		if (!isPasswordMatch) {
             return res.status(401).json({
                 success: false,
                 message: "The password is incorrect"
             });
 	    }
-
     
-        if(newPassword !== confirmPassword){
-            return res.status(400).json({
-                success : false,
-                message : "Passwords do not match"
-            });
-        }
+        // if(newPassword !== confirmPassword){
+        //     return res.status(400).json({
+        //         success : false,
+        //         message : "Passwords do not match"
+        //     });
+        // }
 
-        const hashedPassword = bcrypt.hash(newPassword,10);
-
-        await User.findByIdAndUpdate(userId,{password:hashedPassword},{new:true});
+        const hashedPassword = await bcrypt.hash(newPassword,10);
+        
+        const newUser = await User.findByIdAndUpdate(userId,{ password: hashedPassword },{ new: true });
 
         return res.status(200).json({
             success : true,
             message : "Password updated successfully",
+            newUser
         });
 
-        
     }
     catch(err){
         return res.status(500).json({

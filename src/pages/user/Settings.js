@@ -1,8 +1,8 @@
 import React, { useContext,useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/context';
-
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function Profile() {
 
@@ -10,7 +10,91 @@ export default function Profile() {
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
 
+  const [formData, setformData] = useState({
+    oldPassword : "",
+    newPassword : "",
+  });
 
+  const {oldPassword, newPassword} = formData;
+
+  const [profileData, setprofileData] = useState({
+    dateOfBirth : "",
+    about : " ",
+    contactNumber : "" ,
+    gender : "",
+  });
+
+  const {dateOfBirth,about, contactNumber , gender} = profileData;
+
+  const profileHandler = async(e)=>{
+    e.preventDefault();
+    try{
+      const {response} = await axios.put('/api/v1/profile/updateProfile',{
+        dateOfBirth,
+        gender,
+        contactNumber,
+        about,
+      });
+      
+      toast.success("Profile updated successfully");
+      setprofileData({
+        dateOfBirth:"",
+        about:"",
+        contactNumber:"" ,
+        gender:"",
+      })
+    }
+    catch(err){
+      console.log(err.message);
+    }
+  }
+
+  const changeHandler = (e) => {
+    setformData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  const profileChangeHandler = (e) => {
+    setprofileData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  const handler = async(e)=>{
+    e.preventDefault();
+    try{
+
+      const {response} = await axios.post('/api/v1/auth/changepassword',{
+        oldPassword,
+        newPassword,
+      });
+
+      if(response)
+      {
+        toast.success("Password updated successfully");
+        navigate('/login');
+        localStorage.removeItem("auth");
+        setauth({
+          ...auth,
+          user:null,
+          token:"",
+        });
+      }
+      else
+      {
+        toast.error("Error updating password");
+      }
+    }
+    catch(e){
+      toast.error(e.message);
+      console.log(e.message);
+    }
+  }
+
+  
   function logoutfunction(e)
   {
     e.preventDefault();
@@ -100,15 +184,15 @@ export default function Profile() {
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>Date of Birth</span>
-               <input type="date" name="" id="" className='bg-richblack-700 outline-none rounded-md px-5 py-1 cursor-pointer'/>
+               <input type="date" name="dateOfBirth" id="" value={profileChangeHandler} onChange={changeHandler} className='bg-richblack-700 outline-none rounded-md px-5 py-1 cursor-pointer'/>
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
               <span className='text-sm text-richblack-200'>Gender</span>
-                <select name="" id="" className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
-                  <option value="male" > Male</option>
-                  <option value="male" > Female</option>
-                  <option value="male" > Prefer Not To Say</option>
+                <select name="gender" value={gender} onChange={profileChangeHandler} className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
+                  <option value="Male" > Male</option>
+                  <option value="Female" >Female</option>
+                  <option value="Prefer Not to say" > Prefer Not To Say</option>
                 </select>
               </div>
 
@@ -118,23 +202,22 @@ export default function Profile() {
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>Contact Number</span>
-               <input type="text" name="" id="" className='bg-richblack-700 px-5 rounded-md outline-none py-1 w-full' placeholder='Enter Your Contact No.'/>
+               <input type="text" name='contactNumber'  value={contactNumber} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full' placeholder='Enter Your Contact No.'/>
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>About</span>
-               <input type="text" name="" id="" className='bg-richblack-700 px-5 rounded-md outline-none py-1 w-full' placeholder='Enter about Yourself'/>
+               <input type="text" name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full' placeholder='Enter about Yourself'/>
               </div>
 
             
             </div>
 
-
           </div>
           
         </div>
 
-        <button className='bg-yellow-50 hover:bg-yellow-100 rounded-lg flex flex-row place-self-end px-4 py-1 border-b-[1px] text-richblack-900 font-medium border-white'>Save</button>
+        <button className='bg-yellow-50 hover:bg-yellow-100 rounded-lg flex flex-row place-self-end px-4 py-1 border-b-[1px] text-richblack-900 font-medium border-white' onClick={profileHandler}>Save</button>
 
         <div className='w-full h-44 py-3 mt-4 rounded-xl bg-richblack-800 px-4 flex flex-row items-center'>
 
@@ -148,15 +231,14 @@ export default function Profile() {
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>Current Password</span>
-               <input type="password" name="" id="" className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Enter Your Current Password'/>
+               <input type="password" name="oldPassword" id="" value={oldPassword} onChange={changeHandler} className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Enter Your Current Password'/>
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>New Password</span>
-               <input type="password" name="" id="" className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Enter your New Password'/>
+               <input type="password" name="newPassword" id="" value={newPassword} onChange={changeHandler} className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Enter your New Password'/>
               </div>
 
-              
             </div>
 
 
@@ -164,7 +246,7 @@ export default function Profile() {
           
         </div>
 
-        <button className='bg-yellow-50 hover:bg-yellow-100 rounded-lg flex flex-row place-self-end px-4 py-1 border-b-[1px] text-richblack-900 font-medium border-white'>Update</button>
+        <button className='bg-yellow-50 hover:bg-yellow-100 rounded-lg flex flex-row place-self-end px-4 py-1 border-b-[1px] text-richblack-900 font-medium border-white' onClick={handler}>Update</button>
 
         <button className='bg-richblack-700 mb-7 mt-3 hover:scale-105 mx-auto transition-all duration-200 text-white font-semibold rounded-lg px-7 py-2 border-b-[1px] border-white' >Delete My Account ? </button>
         
@@ -189,3 +271,5 @@ export default function Profile() {
     </div>
   )
 }
+
+

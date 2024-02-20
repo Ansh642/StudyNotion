@@ -16,6 +16,7 @@ import Settings from '../src/pages/user/Settings'
 import InstructorProfile from "./pages/instructor/Profile";
 import Private from "./pages/user/Private";
 import InstructorPrivate from "./pages/instructor/Private";
+import Cart from './pages/user/Cart';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="my-profile" element={<Profile/>} />
           <Route path="enrolled-courses" element={<EnrolledCourses/>} />
           <Route path="user-settings" element={<Settings/>} />
+          <Route path="cart" element={<Cart/>} />
         </Route>
 
         <Route path="/dashboard" element={<InstructorPrivate/>}>
