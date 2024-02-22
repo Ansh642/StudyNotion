@@ -78,7 +78,7 @@ router.post("/addSubSection",auth, isInstructor, createSubSection);
 router.post("/getAllCourses", getAllCourses);
 
 // Get all Registered Courses of a student
-router.get("/getAllStudentCourses",auth, studentCourses);
+router.post("/getAllStudentCourses",auth, studentCourses);
 
 
 // Get Details for a Specific Courses
@@ -111,6 +111,4 @@ router.get("/getAverageRating", getAverageRating);
 
 router.get("/getReviews", getAllRatingReview);
 
-
 module.exports = router;
-

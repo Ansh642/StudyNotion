@@ -13,10 +13,12 @@ import ContactUs from "./pages/ContactUs";
 import Profile from '../src/pages/user/Profile'
 import EnrolledCourses from '../src/pages/user/EnrolledCourses'
 import Settings from '../src/pages/user/Settings'
-import InstructorProfile from "./pages/instructor/Profile";
+import InstructorProfile from "./pages/instructor/InsProfile";
 import Private from "./pages/user/Private";
 import InstructorPrivate from "./pages/instructor/Private";
+import Mycourses from "./pages/instructor/Mycourses";
 import Cart from './pages/user/Cart';
+import Instructor_Settings from "./pages/instructor/Instructor_Settings";
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
         <Route path="/update-password/:id" element={<ChangePass/>}/>
         <Route path="/contact" element={<ContactUs/>}/>
 
+        {/* User Specific Routes */}
         <Route path="/dashboard" element={<Private/>}>
           <Route path="my-profile" element={<Profile/>} />
           <Route path="enrolled-courses" element={<EnrolledCourses/>} />
@@ -41,8 +44,11 @@ function App() {
           <Route path="cart" element={<Cart/>} />
         </Route>
 
+        {/* Instructor Specific Routes */}
         <Route path="/dashboard" element={<InstructorPrivate/>}>
           <Route path="instructor-profile" element={<InstructorProfile/>} />
+          <Route path="my-courses" element={<Mycourses/>} />
+          <Route path="instructor-settings" element={<Instructor_Settings/>}/>
         </Route>
 
 

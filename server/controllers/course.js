@@ -153,8 +153,9 @@ exports.studentCourses = async(req,res)=>{
     try{
         
         const userId = req.user.id;
-        const allCourseDetails = await User.findOne({_id:userId}).populate("courses").exec();
+        const allCourseDetails = await User.findById(userId).populate("courses").exec();
         
+        //console.log(allCourseDetails);
         if(!allCourseDetails.courses)
         {
             return res.status(400).json({
@@ -166,7 +167,7 @@ exports.studentCourses = async(req,res)=>{
         return res.status(200).json({
             success:true,
             message: " Courses fetched successfully",
-            data : allCourseDetails.courses,
+            data:allCourseDetails.courses,
         });
 
     }

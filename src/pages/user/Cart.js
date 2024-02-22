@@ -15,7 +15,7 @@ export default function Cart() {
       <div className='flex flex-row gap-6 mt-5'>
         {/* cart box */}
         <div className='flex flex-col gap-3 w-[60%] border-2 border-richblack-800 h-72'>
-
+          
         </div>
 
         {/* checkout div */}
