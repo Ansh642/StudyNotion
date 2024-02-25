@@ -19,6 +19,7 @@ import InstructorPrivate from "./pages/instructor/Private";
 import Mycourses from "./pages/instructor/Mycourses";
 import Cart from './pages/user/Cart';
 import Instructor_Settings from "./pages/instructor/Instructor_Settings";
+import NewCourse from "./pages/instructor/NewCourse";
 
 function App() {
   return (
@@ -48,7 +49,9 @@ function App() {
         <Route path="/dashboard" element={<InstructorPrivate/>}>
           <Route path="instructor-profile" element={<InstructorProfile/>} />
           <Route path="my-courses" element={<Mycourses/>} />
+          <Route path="new-course" element={<NewCourse/>} />
           <Route path="instructor-settings" element={<Instructor_Settings/>}/>
+
         </Route>
 
 

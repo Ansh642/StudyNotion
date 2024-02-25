@@ -81,7 +81,11 @@ export default function Mycourses() {
 
       {/* My Profile Section */}
       <div className={`flex ml-32 w-[60%] flex-col gap-5 py-4 px-5 place-items-start ${show===true ? `opacity-20` : ``}`}>
+        
+        <div className='mt-2 flex justify-end gap-96'>
         <p className='text-3xl text-richblack-25 hover:text-white'>My Courses</p>
+        <button className='bg-yellow-50 hover:scale-105 hover:transition-all duration-150 rounded-lg px-4 py-1 border-b-[1px] ml-64 border-white' onClick={()=>navigate('/dashboard/new-course')}>New</button>
+        </div>
       
 
         <div className='bg-richblack-700 w-full h-12 rounded-xl mt-6'>
@@ -148,3 +152,5 @@ export default function Mycourses() {
     </div>
   )
 }
+
+
