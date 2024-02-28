@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
-import { AppContext } from "../../context/context";
+import { AppContext } from '../../context/Profile';
 
 
 export default function Private() {

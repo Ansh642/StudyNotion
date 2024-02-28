@@ -19,7 +19,7 @@ import InstructorPrivate from "./pages/instructor/Private";
 import Mycourses from "./pages/instructor/Mycourses";
 import Cart from './pages/user/Cart';
 import Instructor_Settings from "./pages/instructor/Instructor_Settings";
-import NewCourse from "./pages/instructor/NewCourse";
+import NewCourse from "./pages/instructor/CourseInf";
 
 function App() {
   return (

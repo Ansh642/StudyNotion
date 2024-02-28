@@ -2,7 +2,7 @@ import {React,useContext,useEffect,useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo/Logo-Full-Light.png'
 import {NavbarLinks}  from '../data/navbar-links'
-import { AppContext } from '../context/context';
+import { AppContext } from '../context/Profile';
 import { FiShoppingBag } from "react-icons/fi";
 import { CartContext } from '../context/Cart';
 import { GoChevronDown } from "react-icons/go";

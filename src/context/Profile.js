@@ -1,14 +1,18 @@
 import { useState,useEffect, createContext } from "react";
 import axios from "axios";
 
-export const ProfileContext = createContext();
+export const AppContext = createContext();
     
-export function ProfileProvider({children}){
+export function AuthProvider({children}){
 
     const [auth, setauth] = useState({
+        signup : null,
+        account : null,
         user : null,
+        token : "",
     });
 
+    axios.defaults.headers.common['Authorization'] = auth?.token;
     
     useEffect ( ()=>{
         const data = localStorage.getItem("auth");
@@ -16,7 +20,9 @@ export function ProfileProvider({children}){
         {
             const parseData = JSON.parse(data);
             setauth({
+                
                 user: parseData.userDetails,
+                token: parseData.token,
             })
         }
     },[]);
@@ -25,9 +31,9 @@ export function ProfileProvider({children}){
         auth,setauth,
     }
     
-    return <ProfileContext.Provider value={value}>
+    return <AppContext.Provider value={value}>
         {children}
-    </ProfileContext.Provider>
+    </AppContext.Provider>
 
 }
 

@@ -5,7 +5,7 @@ import "./index.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./context/context";
+import { AuthProvider } from "./context/Profile";
 import { CartProvider } from "./context/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

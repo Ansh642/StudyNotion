@@ -1,6 +1,6 @@
 import React, { useContext,useEffect,useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { AppContext } from '../../context/context';
+import { AppContext } from '../../context/Profile';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { Line, Circle } from 'rc-progress';

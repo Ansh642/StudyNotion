@@ -1,7 +1,7 @@
 import {React,useState,useRef,useContext} from 'react'
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../context/context';
+import { AppContext } from '../context/Profile'
 import {toast} from 'react-toastify'
 import axios from 'axios';
 

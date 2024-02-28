@@ -3,7 +3,7 @@ import LoginImg from '../assets/Images/login.webp'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AppContext } from '../context/context';
+import { AppContext } from '../context/Profile';
 import {toast} from 'react-toastify'
 
 export default function Login() {

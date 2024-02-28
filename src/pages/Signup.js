@@ -5,7 +5,7 @@ import countryCode from '../data/countrycode.json'
 import axios from 'axios';
 import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../context/context';
+import { AppContext } from '../context/Profile';
 
 export default function Signup() {
   

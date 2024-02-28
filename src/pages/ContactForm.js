@@ -24,7 +24,7 @@ export default function ContactForm() {
     // },[reset,isSubmitSuccessful]);
 
 
-    const  handler= async(data)=>{
+    const handler= async(data)=>{
         console.log(data);
     }
 
