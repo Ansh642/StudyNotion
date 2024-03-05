@@ -11,7 +11,6 @@ exports.createCourse = async(req,res)=>{
     const thumbnail = req.files.image;
 
     const userId = req.user.id;
-    console.log(userId);
 
     if(!courseDescription  || !courseName || !whatwillyoulearn || !price || !category)
     {
@@ -42,7 +41,7 @@ exports.createCourse = async(req,res)=>{
 
     // upload image file to cloundinary
     const thumbnailImage = await uploadImageToCloudinary(thumbnail,process.env.FOLDER_NAME);
-    
+   
     const newCourse = await Course.create({
         courseName,
         courseDescription,

@@ -7,16 +7,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/Profile";
 import { CartProvider } from "./context/Cart";
+import { CourseProvider } from "./context/Course";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
   
     <AuthProvider>
-      <CartProvider>
+    <CartProvider>
+    <CourseProvider>
     <BrowserRouter>
-    <App />
+     <App />
     </BrowserRouter>
+    </CourseProvider>
     </CartProvider>
     </AuthProvider>
   

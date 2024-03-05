@@ -1,8 +1,5 @@
 import {React,useEffect,useState} from 'react'
 import { FaCheck } from "react-icons/fa";
-import CourseInf from './CourseInf';
-import CourseBuilder from './CourseBuilder';
-import CoursePublish from './CoursePublish';
 
 export default function Steps() {
  
@@ -52,9 +49,6 @@ export default function Steps() {
         })
     }
     </div>
-
-
-    {/* <button className='bg-yellow-50 px-2 py-2 text-richblack-900 rounded-md'>Next</button> */}
 
     </div>
   )
