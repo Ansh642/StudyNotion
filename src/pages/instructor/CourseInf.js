@@ -1,9 +1,7 @@
 import {React,useContext,useEffect,useState} from 'react'
 import { BsLightningFill } from "react-icons/bs";
-import Steps from './Steps';
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
-import ContactForm from '../ContactForm';
 import { CourseContext } from '../../context/Course';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +12,7 @@ export default function CourseInf() {
     register,
     handleSubmit,
     reset,
-    formState:{errors,isSubmitSuccessful}
+    formState:{errors}
   } = useForm();
 
   const navigate = useNavigate();
@@ -61,13 +59,19 @@ export default function CourseInf() {
       if(response.data.success)
       {
         // we have to save course details in course context
+        console.log(response.data.newCourse);
+
         toast.success("Course details saved successfully.");
         setcourse({
-          courseDetails:data,
+          courseDetails:response.data.newCourse,
         });
-        //console.log(course);
+        console.log(course);
+      
         localStorage.setItem("courseDetails",JSON.stringify(response.data.newCourse));
         reset();
+
+        navigate('/dashboard/new-course-continue');
+        
       }
       else
       {
@@ -95,7 +99,7 @@ export default function CourseInf() {
         <p className='text-3xl text-white mt-4'>Add New Course</p>
 
         {/* Form div */}
-      <form className=' bg-richblack-800 py-5 px-4 flex flex-col rounded-md gap-7 mt-4'>
+      <form className=' bg-richblack-800 py-5 px-4 flex flex-col rounded-md gap-7 mt-4' onSubmit={handleSubmit(handler)}>
 
         <div className='flex flex-col text-richblack-5'>
           <label className='ml-1'>Course Title<sup className='text-brown-400'>*</sup></label>
@@ -152,12 +156,11 @@ export default function CourseInf() {
       <button className='bg-richblack-700 hover:scale-105 transition-all duration-200 text-white font-medium rounded-lg px-5 py-2 border-b-[1px] border-white'
        onClick={resetForm}>Clear Form</button>
 
-      <button type='sumbit' className='bg-yellow-50 hover:scale-105 transition-all duration-200 rounded-lg px-5 py-2 border-b-[1px] border-white'
-       onClick={()=>navigate('/dashboard/new-course-continue')}>Save Changes and Proceed</button>
+      <button type='sumbit' className='bg-yellow-50 hover:scale-105 transition-all duration-200 rounded-lg px-5 py-2 border-b-[1px] border-white'>Save Changes and Proceed</button>
 
     </div>
       
-      </form>
+    </form>
 
     </div>
 
@@ -181,10 +184,8 @@ export default function CourseInf() {
 
     </div>
 
-
     </div>
  
-    
     </div>
   )
 }

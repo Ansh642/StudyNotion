@@ -21,6 +21,7 @@ import Cart from './pages/user/Cart';
 import Instructor_Settings from "./pages/instructor/Instructor_Settings";
 import NewCourse from "./pages/instructor/CourseInf";
 import CourseBuilder from "./pages/instructor/CourseBuilder";
+import CoursePublish from "./pages/instructor/CoursePublish";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="my-courses" element={<Mycourses/>} />
           <Route path="new-course" element={<NewCourse/>} />
           <Route path="new-course-continue" element={<CourseBuilder/>} />
+          <Route path="new-course-final" element={<CoursePublish/>} />
           <Route path="instructor-settings" element={<Instructor_Settings/>}/>
 
         </Route>

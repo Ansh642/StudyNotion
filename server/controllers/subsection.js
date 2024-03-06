@@ -4,15 +4,16 @@ const {uploadImageToCloudinary} = require('../utils/imageUpload');
 
 require("dotenv").config();
  
+
 exports.createSubSection= async(req,res)=>{
     try
     {
-        const {sectionId, title, timeDuration,description} = req.body;
+        const {sectionId, title,description} = req.body;
         const videoUrl = req.files.videoUrl;
 
-        console.log("object")
+        //console.log(title, description);
          
-        if(!sectionId || !title || !timeDuration || !description || !videoUrl){
+        if(!sectionId || !title || !description || !videoUrl){
             return res.status(400).json({
                 success: false,
                 message: 'Please enter complete details',
@@ -20,20 +21,18 @@ exports.createSubSection= async(req,res)=>{
         }
 
         const uploadVideo = await uploadImageToCloudinary(videoUrl,process.env.FOLDER_NAME);
-        
-        // create sub section
-        const subSectionDetails = await Subsection.create({
-            title, timeDuration, description, videoUrl : uploadVideo.secure_url,
-        });
+        console.log(uploadVideo);
 
-        // update section
+        const subSectionDetails = await Subsection.create({
+            title, description, videoUrl : uploadVideo.secure_url,
+        });
+        
         const updatedSection = await Section.findByIdAndUpdate({ _id:sectionId},{
             $push:{
                 subSection : subSectionDetails._id,
             }
         },{new: true});
 
-        console.log(updatedSection);
 
         return res.status(200).json({
             success : true,

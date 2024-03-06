@@ -6,14 +6,13 @@ exports.createSection = async(req,res)=>{
 
     // fetch details and update course
     const {sectionName , courseId} = req.body;
-
+    
     if(!sectionName || !courseId){
         return res.status(400).json({
             success: false,
             message : 'Please enter complete details',
         });        
     }
-
     const newSection = await Section.create({sectionName});
 
     const updatedCourse = await Course.findByIdAndUpdate(courseId,{
@@ -29,6 +28,7 @@ exports.createSection = async(req,res)=>{
     });
 
 }
+
 
 exports.updateSection= async(req,res)=>{
 
@@ -58,6 +58,7 @@ exports.updateSection= async(req,res)=>{
     }
 }
 
+
 exports.deleteSection=async(req,res)=>{
     try{
     const {sectionId,courseId}=req.body;
@@ -83,7 +84,5 @@ exports.deleteSection=async(req,res)=>{
         });
     }
 }
-
-
 
 
