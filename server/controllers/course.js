@@ -178,4 +178,3 @@ exports.studentCourses = async(req,res)=>{
         });
     }
 }
-

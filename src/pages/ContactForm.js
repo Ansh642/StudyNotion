@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import countryCode from '../data/countrycode.json'
 import { useForm } from 'react-hook-form'
 
@@ -7,11 +7,9 @@ export default function ContactForm() {
     const {
         register,
         handleSubmit,
-        reset,
-        formState:{errors,isSubmitSuccessful}
+        formState:{errors}
     } = useForm();
 
-    // useEffect ( ()=>{
     //     if(isSubmitSuccessful()){
     //         reset({
     //             email:"",

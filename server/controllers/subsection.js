@@ -11,7 +11,7 @@ exports.createSubSection= async(req,res)=>{
         const {sectionId, title,description} = req.body;
         const videoUrl = req.files.videoUrl;
 
-        //console.log(title, description);
+       
          
         if(!sectionId || !title || !description || !videoUrl){
             return res.status(400).json({
@@ -21,7 +21,6 @@ exports.createSubSection= async(req,res)=>{
         }
 
         const uploadVideo = await uploadImageToCloudinary(videoUrl,process.env.FOLDER_NAME);
-        console.log(uploadVideo);
 
         const subSectionDetails = await Subsection.create({
             title, description, videoUrl : uploadVideo.secure_url,

@@ -17,7 +17,7 @@ export default function CoursePublish() {
 
   const navigate = useNavigate();
 
-  const {course} = useContext(CourseContext);
+  const {course,setcourses} = useContext(CourseContext);
 
   const sectionId = course?.sectionDetails?._id;
 
@@ -44,6 +44,10 @@ export default function CoursePublish() {
       {
         toast.success("Course Published successfully.");
         reset();
+        setcourses({
+          courseDetails :null,
+          sectionDetails :null
+        })
         navigate('/dashboard/my-courses');
       }
       else

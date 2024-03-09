@@ -22,6 +22,7 @@ import Instructor_Settings from "./pages/instructor/Instructor_Settings";
 import NewCourse from "./pages/instructor/CourseInf";
 import CourseBuilder from "./pages/instructor/CourseBuilder";
 import CoursePublish from "./pages/instructor/CoursePublish";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPass/>}/>
         <Route path="/update-password/:id" element={<ChangePass/>}/>
         <Route path="/contact" element={<ContactUs/>}/>
+        <Route path="/:category" element={<Category/>}/>
 
         {/* User Specific Routes */}
         <Route path="/dashboard" element={<Private/>}>

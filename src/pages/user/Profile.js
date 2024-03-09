@@ -81,7 +81,7 @@ export default function Profile() {
            </div>
 
            <div className='ml-[450px]'>
-           <button className='bg-yellow-50 rounded-lg px-5 py-2 border-b-[1px] border-white text-black font-semibold' onClick={()=>navigate("/")}> ✍️ Edit</button>
+           <button className='bg-yellow-50 rounded-lg px-5 py-2 border-b-[1px] border-white text-black font-semibold' onClick={()=>navigate("/dashboard/user-settings")}> ✍️ Edit</button>
            </div>
 
           </div>
@@ -96,7 +96,7 @@ export default function Profile() {
             <div className='flex flex-row items-center'>
               <p className='text-xl font-inter font-semibold'>Personal Details</p>
               <div className='ml-[540px]'>
-               <button className='bg-yellow-50 rounded-lg px-5 py-2 border-b-[1px] border-white text-black font-semibold' onClick={()=>navigate("/")}> ✍️ Edit</button>
+               <button className='bg-yellow-50 rounded-lg px-5 py-2 border-b-[1px] border-white text-black font-semibold' onClick={()=>navigate("/dashboard/user-settings")}> ✍️ Edit</button>
               </div>
             </div>
 
@@ -120,7 +120,7 @@ export default function Profile() {
 
               <div className='flex flex-col gap-1 ml-28'>
                 <p className='text-richblack-500'>Phone Number</p>
-                <p>8171579897</p>
+                <p>{auth?.user?.additionalDetails?.contactNumber}</p>
               </div>
             </div>
 

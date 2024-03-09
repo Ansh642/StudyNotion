@@ -84,25 +84,25 @@ export default function Mycourses() {
         
         <div className='mt-2 flex justify-end gap-96'>
         <p className='text-3xl text-richblack-25 hover:text-white'>My Courses</p>
-        <button className='bg-yellow-50 hover:scale-105 hover:transition-all duration-150 rounded-lg px-4 py-1 border-b-[1px] ml-64 border-white' onClick={()=>navigate('/dashboard/new-course')}>New</button>
+        <button className='bg-yellow-50 hover:bg-yellow-200 hover:transition-all duration-200 rounded-lg px-4 py-1 border-b-[1px] ml-64 border-white' onClick={()=>navigate('/dashboard/new-course')}>New</button>
         </div>
       
 
         <div className='bg-richblack-700 w-full h-12 rounded-xl mt-6'>
-          <div className='text-richblack-100 flex flex-row gap-3 px-2 py-1 items-center mt-2 font-medium'>
-            <p className='ml-4'>Course Name</p>
-            <p className='ml-64'>Duration</p>
-            <p className='ml-[120px]'>Price</p>
-            <p className='ml-28'>Actions</p>
+          <div className='text-richblack-100 flex flex-row gap-3 justify-between px-2 py-1 items-center mt-2 font-medium'>
+            <p className='mr-3'>Course Name</p>
+            <p className=''>Duration</p>
+            <p className=''>Price</p>
+            <p className='mr-6'>Actions</p>
           </div>
         </div>
 
         <div className='flex flex-col gap-6'>
         {
         courses?.map((course, index) => (
-         <div key={index} className='text-white h-auto w-full flex flex-row items-center px-2'>
+         <div key={index} className='text-white h-auto w-full justify-between flex flex-row px-2'>
 
-           <div className='flex gap-3 w-[70%]'>
+           <div className='flex gap-3 w-[50%]'>
             <img src={course.thumbnail} alt="" className='h-9 w-10 rounded-xl object-contain'/>
              <div className='flex flex-col text-sm'>
               <p className='font-semibold'>{course.courseName}</p>
@@ -110,17 +110,17 @@ export default function Mycourses() {
              </div>
            </div>
 
-           <div className='text-richblack-300 ml-52 items-start w-[30%]'>
+           <div className='text-richblack-300 flex ml-20 w-[20%]'>
             2hr 30mins
            </div>
 
-           <div className='text-richblack-300 ml-28 items-start w-[30%]'>
+           <div className='text-richblack-300 flex ml-40 w-[15%]'>
             {course.price}
            </div>
 
-            <div className='text-richblack-300 flex gap-2 ml-20 cursor-pointer'>
-              <MdOutlineModeEdit />
-              <RiDeleteBin6Fill />
+            <div className=' flex gap-3 ml-40 w-[17%] cursor-pointer'>
+              <MdOutlineModeEdit className='text-richblack-300 hover:text-white' size={18}/>
+              <RiDeleteBin6Fill className='text-richblack-300 hover:text-white' size={18}/>
             </div>
            
 

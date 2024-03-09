@@ -99,7 +99,7 @@ export default function About() {
       </div>
 
       {/* section 3 */}
-      <ContactForm/>
+      {/* <ContactForm/> */}
 
       {/* section 4 */}
       <div className='flex flex-col gap-5 mt-20'>

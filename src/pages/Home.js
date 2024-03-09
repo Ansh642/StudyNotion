@@ -55,6 +55,8 @@ export default function Home() {
     setcourses(result[0].courses);
   }
 
+  
+
   return (
     <div>
         {/* section 1  */}

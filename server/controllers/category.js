@@ -56,9 +56,13 @@ exports.showAllCategories=async(req,res)=>{
 
 exports.categoryPageDetails = async (req,res)=>{
     try{
-    const {categoryId} = req.body;
+    const {name} = req.body;
 
-    const allCourse = Course.findById(categoryId).populate("Course").exec();
+    const categoryDetails = await Category.findOne({name});
+    const categoryId = categoryDetails._id;
+
+    const allCourse = await Course.findOne({category:categoryId}).exec();
+
     
     if(!allCourse){
         return res.status(400).json({
@@ -67,18 +71,21 @@ exports.categoryPageDetails = async (req,res)=>{
         });
     }
 
+
     // get courses from different categories
     const otherCourses = await Course.find({
-        _id : {$ne : categoryId},
-    }).populate("Course").exec();
+        category : {$ne : categoryId},
+    }).exec();
 
 
     // get all top selling courses
-    const topCourses = Course.find({}).sort({studentsEnrolled : -1}).limit(10);
+    // const topCourses = Course.find({}).sort({studentsEnrolled : -1}).limit(10);
 
     return res.status(200).json({
         success: true,
         message: 'All courses fetched successfully',
+        allCourse,
+        otherCourses,
     });
 
   }

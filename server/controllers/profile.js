@@ -6,7 +6,7 @@ const Course = require('../models/course');
 //update profile
 exports.updateProfile = async (req, res) => {
 	try {
-		const { dateOfBirth = "", about = "", contactNumber , gender} = req.body;
+		const { about, contactNumber, gender } = req.body;
 		const id = req.user.id;
 
 		// Find the profile by id
@@ -14,14 +14,13 @@ exports.updateProfile = async (req, res) => {
 		const profile = await Profile.findById(userDetails.additionalDetails);
 
 		// Update the profile fields
-		profile.dateOfBirth = dateOfBirth;
 		profile.about = about;
 		profile.contactNumber = contactNumber;
     profile.gender = gender;
 
 		await profile.save();
 
-		return res.json({
+		return res.status(200).json({
 			success: true,
 			message: "Profile updated successfully",
 			profile,
