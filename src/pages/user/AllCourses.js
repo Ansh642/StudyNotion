@@ -3,15 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/Profile';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { Line } from 'rc-progress';
+import '../../App.css'
 
-export default function Profile() {
+export default function AllCourses() {
 
   const {auth,setauth} = useContext(AppContext);
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
   const [courses, setcourses] = useState([]);
-  const [course, setcourse] = useState('All');
 
 
   useEffect( ()=>{
@@ -32,14 +31,12 @@ export default function Profile() {
       }
     }
 
-
     fetchData();
   },[courses]);
-  
 
 
   function logoutfunction(e)
-  {
+    {
     e.preventDefault();
 
     localStorage.removeItem("auth");
@@ -53,13 +50,12 @@ export default function Profile() {
     navigate("/");
   }
 
-
   return (
     <div>
-      <div className="flex h-screen bg-gray-100 relative">
+      <div className="flex min-h-screen bg-gray-100 relative ansh">
 
       {/* SideBar */}
-      <nav className={`flex-shrink-0 w-56 text px-4 py-2 bg-richblack-800 border-r border-gray-200 ${show===true ? "opacity-20" : ""}`}>
+      <nav className={`flex-shrink-0 min-h-screen  w-56 text px-4 py-2 bg-richblack-800 border-r border-gray-200 ${show===true ? "opacity-20" : ""}`}>
         
         <h1 className="text-2xl font-bold text-richblack-200">StudyNotion Dashboard</h1>
         <ul className="mt-4">
@@ -91,63 +87,36 @@ export default function Profile() {
         </ul>
       </nav>
 
-      {/* My Profile Section */}
-      <div className={`flex ml-32 w-[60%] flex-col gap-5 py-4 px-5 place-items-start ${show===true ? `opacity-20` : ``}`}>
-        <p className='text-3xl text-richblack-25 hover:text-white'>Enrolled Courses</p>
-        
-        <div className={`flex flex-row gap-6 cursor-pointer bg-richblack-800  px-5 py-2 rounded-full`}>
-          <p className={`${course==='All' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('All')}}>All</p>
-          <p className={`${course==='Pending' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('Pending')}}>Pending</p>
-          <p className={`${course==='Completed' ? `text-white` : `text-richblack-200`}`} onClick={()=>{setcourse('Completed')}}>Completed</p>
+      {/* All Courses Section */}
+      <div className={`flex ml-32 w-[65%] flex-col gap-5 py-4 px-5 place-items-start ${show===true ? `opacity-20` : ``}`}>
+        <p className='text-4xl text-richblack-25 hover:text-white mt-2'>All Courses</p>
+
+        <div className="container mx-auto py-8">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-9 -mt-6">
+        {courses?.map((course) => (
+          <div key={course._id} className="bg-richblack-800 rounded-md overflow-hidden shadow-md h-96 ">
+            <img src={course.thumbnail} alt={course.courseName} className="w-full border-richblack-900 border-2 cursor-pointer h-48 object-fill"/>
+            <div className="p-4">
+              <h3 className="text-lg font-bold mb-2 text-white">{course.courseName}</h3>
+              <p className="text-richblack-100 text-sm h-14">{course.courseDescription}</p>
+              <div className="mt-7 flex justify-between items-center">
+                <span className=" font-semibold text-white">Rs. {course.price} /-</span>
+                
+                <button 
+                 className="bg-blue-500 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
         </div>
 
-
-        <div className='bg-richblack-700 w-full h-12 rounded-xl mt-6'>
-          <div className='text-richblack-100 flex flex-row gap-3 justify-between px-2 py-1 items-center mt-2 font-medium'>
-            <p className='mr-3'>Course Name</p>
-            <p className=''>Duration</p>
-            <p className=''>Progress</p>
-            <p className='mr-6'>Actions</p>
-          </div>
-        </div>
-
-        <div className='flex flex-col gap-6'>
-        {
-        courses?.map((course, index) => (
-         <div key={index} className='text-white h-auto w-full flex flex-row items-center px-2'>
-
-           <div className='flex gap-3 w-[50%]'>
-            <img src={course.thumbnail} alt="" className='h-9 w-10 rounded-xl object-contain'/>
-             <div className='flex flex-col text-sm'>
-              <p className='font-semibold'>{course.courseName}</p>
-              <p className='text-xs text-richblack-300'>{course.whatwillyoulearn}</p>
-             </div>
-           </div>
-
-           <div className='text-richblack-300 ml-20 items-start w-[20%]'>
-            2hr 30mins
-           </div>
- 
-           <div className=' w-[20%] ml-40 flex items-center' >
-           <Line percent={60} strokeWidth={7} strokeColor="#D3D3D3" />
-           </div>
-
-           <div>
-           <div className="w-[10%] ml-44 h-8 rounded-full bg-gray-300 flex flex-col gap-1 cursor-pointer items-center justify-center">
-            {/* Three dots icon */}
-            <div className="w-1 h-1 bg-richblack-300 rounded-full"></div>
-            <div className="w-1 h-1 bg-richblack-300 rounded-full mx-1"></div>
-            <div className="w-1 h-1 bg-richblack-300 rounded-full"></div>
-          </div>
-           </div>
-
-          </div>
-        ))
-        }
        </div>
 
-
-      </div>
+          
+    </div>
 
       {/* Log out tab */}
       <div className={`absolute left-[700px] h-44 mt-60 mx-auto w-80 bg-richblack-800 rounded-2xl flex flex-col py-4 px-4 ${show===true  ? `visible transition-all duration-100` : `invisible`}`}>
@@ -168,10 +137,3 @@ export default function Profile() {
     </div>
   )
 }
-
-
-
-
-
-
-

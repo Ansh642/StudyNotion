@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router";
-import "./App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -18,11 +17,13 @@ import Private from "./pages/user/Private";
 import InstructorPrivate from "./pages/instructor/Private";
 import Mycourses from "./pages/instructor/Mycourses";
 import Cart from './pages/user/Cart';
-import Instructor_Settings from "./pages/instructor/Instructor_Settings";
+import InstructorSettings from "./pages/instructor/InstructorSettings";
 import NewCourse from "./pages/instructor/CourseInf";
 import CourseBuilder from "./pages/instructor/CourseBuilder";
 import CoursePublish from "./pages/instructor/CoursePublish";
 import Category from "./pages/Category";
+import AllCourses from "./pages/user/AllCourses";
+import "./App.css";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/dashboard" element={<Private/>}>
           <Route path="my-profile" element={<Profile/>} />
           <Route path="enrolled-courses" element={<EnrolledCourses/>} />
+          <Route path="all-courses" element={<AllCourses/>} />
           <Route path="user-settings" element={<Settings/>} />
           <Route path="cart" element={<Cart/>} />
         </Route>
@@ -56,7 +58,7 @@ function App() {
           <Route path="new-course" element={<NewCourse/>} />
           <Route path="new-course-continue" element={<CourseBuilder/>} />
           <Route path="new-course-final" element={<CoursePublish/>} />
-          <Route path="instructor-settings" element={<Instructor_Settings/>}/>
+          <Route path="instructor-settings" element={<InstructorSettings/>}/>
 
         </Route>
 

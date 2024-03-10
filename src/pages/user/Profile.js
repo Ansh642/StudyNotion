@@ -16,6 +16,7 @@ export default function Profile() {
     e.preventDefault();
 
     localStorage.removeItem("auth");
+    localStorage.removeItem("cart");
     setauth({
       ...auth,
       user:null,

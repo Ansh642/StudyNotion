@@ -39,11 +39,13 @@ export default function Navbar() {
     setshow(false);
   },[])
 
+  
   function logoutHandler(e)
   {
     e.preventDefault();
 
     localStorage.removeItem("auth");
+    localStorage.removeItem("cart");
     setauth({
       ...auth,
       user:null,
@@ -51,7 +53,7 @@ export default function Navbar() {
     });
     toast.success("Logged out successfully");
     navigate("/");
-    setshow(!show);
+    setshow(false);
   }
 
 
@@ -103,7 +105,7 @@ export default function Navbar() {
         }
         </div>
 
-        <div className='flex flex-row gap-4 items-center'>
+        <div className='flex flex-row gap-5 items-center'>
           {
             auth.token ? (<>
             {
@@ -111,11 +113,13 @@ export default function Navbar() {
               
               (<>
                 
-                <CiSearch className='text-white cursor-pointer' />
+                <CiSearch className='text-white cursor-pointer' size={20}/>
 
                 <Link to='/dashboard/cart' className='text-white relative'>
-                  <FiShoppingBag />
-                  <p className='absolute -top-3 left-3'>{cart?.length}</p>
+                  <FiShoppingBag size={20}/>
+                   {
+                    cart?.length? (<><p className='absolute -top-3 left-3 bg-pink-300 flex items-center justify-center rounded-full w-5 h-5 '>{cart?.length}</p></>) : (<></>)
+                   }
                 </Link>
 
                 <nav className="bg-gray-800">

@@ -78,12 +78,12 @@ export default function Login() {
         
         <div className='flex flex-col gap-1'>
             <span className='text-sm text-richblack-50'>Email Adress</span>
-            <input type="email" name="email" value={email} onChange={changeHandler}  placeholder='Enter Your E-mail' className='pl-2 px-1 py-2 bg-richblack-800 w-[65%] rounded-md border-none'/> 
+            <input type="email" name="email" value={email} onChange={changeHandler}  placeholder='Enter Your E-mail' className='outline-none pl-2 px-1 py-2 bg-richblack-800 w-[65%] rounded-md border-none'/> 
         </div>
             
         <div className='flex flex-col gap-1 mt-6'>
          <span className='text-sm text-richblack-50'>Password</span>
-         <input type="password"  name="password" value={password} onChange={changeHandler}   placeholder='Enter Your Password' className='pl-2 px-1 py-2 bg-richblack-800 w-[65%] rounded-md'/>
+         <input type="password"  name="password" value={password} onChange={changeHandler}   placeholder='Enter Your Password' className='outline-none pl-2 px-1 py-2 bg-richblack-800 w-[65%] rounded-md'/>
         </div>
         
         <Link to="/reset-password">

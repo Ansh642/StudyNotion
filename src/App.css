@@ -13,3 +13,8 @@ html, body{
     background-repeat: repeat-x;
 }
 
+.ansh{
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+

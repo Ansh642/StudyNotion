@@ -31,7 +31,6 @@ export default function Profile() {
     e.preventDefault();
     try{
       const response = await axios.put('/api/v1/profile/updateProfile',{
-        dateOfBirth,
         gender,
         contactNumber,
         about,
@@ -104,6 +103,7 @@ export default function Profile() {
     e.preventDefault();
 
     localStorage.removeItem("auth");
+    localStorage.removeItem("cart");
     setauth({
       ...auth,
       user:null,
@@ -208,12 +208,14 @@ export default function Profile() {
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>Date of Birth</span>
-               <input type="date" name="dateOfBirth" id="" value={profileChangeHandler} onChange={changeHandler} className='bg-richblack-700 outline-none rounded-md px-5 py-1 cursor-pointer'/>
+               <input
+                type="date" id="datePicker" name="datePicker" value={dateOfBirth} onChange={profileChangeHandler} className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'/>
+
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
               <span className='text-sm text-richblack-200'>Gender</span>
-                <select name="gender" value={gender} onChange={profileChangeHandler} className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
+                <select name="gender" value={gender} onChange={profileChangeHandler} className=' bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
                   <option value="Male" > Male</option>
                   <option value="Female" >Female</option>
                   <option value="Prefer Not to say" > Prefer Not To Say</option>

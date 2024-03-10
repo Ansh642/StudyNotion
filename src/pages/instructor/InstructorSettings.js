@@ -4,7 +4,7 @@ import { AppContext } from '../../context/Profile';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-export default function Instructor_Settings() {
+export default function InstructorSettings() {
 
   const {auth,setauth} = useContext(AppContext);
   const [show, setshow] = useState(false);

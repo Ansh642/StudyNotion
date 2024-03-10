@@ -2,8 +2,6 @@ const Rating = require("../models/rating");
 const Course = require("../models/course");
 const { default: mongoose } = require("mongoose");
 
-
-
 exports.createRating = async(req,res)=>{
     try{
 
@@ -40,7 +38,7 @@ exports.createRating = async(req,res)=>{
 
     const newCourse = await Course.findByIdAndUpdate(courseId,{
         $push:{
-            ratingAndReviews : ratingDeatils._id,
+            ratingAndReviews : ratingDetails._id,
         }
     },{new:true});
 
@@ -152,8 +150,3 @@ exports.getAllRatingReview = async (req,res)=>{
     }); 
  }
 }
-
-
-
-
-
