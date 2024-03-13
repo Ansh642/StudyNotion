@@ -93,11 +93,11 @@ export default function Signup() {
 
           <div className='flex flex-row gap-3'>
          
-          <select className=' w-[15%] pl-2 px-1 py-2 bg-richblack-800 rounded-md text-richblack-50 cursor-pointer'>
+          <select className=' w-[25%] pl-2 px-1 py-2 bg-richblack-800 rounded-md text-richblack-50 cursor-pointer'>
           {
           countryCode.map( (ele,index) => {
             return (
-              <option key={index} >
+              <option key={index} selected={ele.code==='+91'}>
                 <p>{ele.code} - {ele.country}</p>
               </option>
             )}
@@ -105,7 +105,7 @@ export default function Signup() {
           </select>
 
           <div>
-            <input type="text" name="phoneNo" value={phoneNo} onChange={handleOnChange} placeholder='Enter Your Number' className='pl-2 px-1 py-2 bg-richblack-800 w-full rounded-md border-none'/>
+            <input type="text" name="phoneNo" value={phoneNo} onChange={handleOnChange} placeholder='Enter Your Number' className='pl-2 px-1 py-2 bg-richblack-800 w-[355px] rounded-md border-none'/>
           </div>
 
           </div>
