@@ -18,3 +18,21 @@ html, body{
     scrollbar-width: none;
 }
 
+.review-slider-container {
+    overflow: hidden;
+  }
+  
+  .review-slider {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Enables momentum scrolling in iOS */
+    scroll-behavior: smooth; /* Enables smooth scrolling */
+  }
+  
+  .review-box {
+    flex: 0 0 auto;
+    margin-right: 10px; /* Adjust as needed */
+    width: 300px; /* Adjust as needed */
+  }
+  

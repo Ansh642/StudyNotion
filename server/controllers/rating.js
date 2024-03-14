@@ -115,20 +115,18 @@ exports.getAverageRating = async(req,res)=>{
 
 
 exports.getAllRatingReview = async (req,res)=>{
+
     try{
-
-    const {courseId}= req.body;
-
     // get all ratings
-    const allRating = await Rating.find({}).sort({rating :"desc"}).populate({
-        path :" User",
-        firstName : true,
-        lastName : true,
+    const allRating = await Rating.find({}).populate({
+        path: "course",
+        select: "courseName -_id" // Specify the fields you want to select and exclude _id
     }).populate({
-        path : "Course",
-        courseName : true,
+        path : "user",
+        select: "firstName lastName image email -_id" 
     }).exec();
-
+    
+    
     
     if(!allRating) {
         return res.status(400).json({

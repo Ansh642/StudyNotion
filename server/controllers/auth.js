@@ -7,6 +7,7 @@ const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const Profile = require("../models/profile");
 const crypto = require("crypto");
+const { contactUsEmail } = require("../templates/contactFormRes");
 
 // create a otp and save it to the database
 exports.sendotp = async(req, res)=>{
@@ -353,36 +354,33 @@ exports.resetPassword = async(req,res)=>{
     }
 }
 
-// incomplete
-exports.contactUs = async (req,res)=>{
-    try{
-       //const userId = req.user.id;
-       console.log("object")
+exports.contactUs = async (req, res) => {
+    const { email, firstname, lastname, message, phoneNo, countrycode } = req.body
 
-       const {firstName,lastName,email,phoneNo , message} = req.body;
-       
-       if(!firstName || !lastName || !email || !message){
-        return res.json({
-            success : false,
-            message: 'Enter complete details',
-        });
-       }
+    console.log(req.body);
 
-       const emailResponse = await mailsend(email, "E-mail for query" , message);
-
-       console.log("Email sent successfully:", emailResponse.response);
-    }
-    catch(err){
-        return res.json({
-            success:false,
-            message: 'Error  sending mail',
-        });
+    try {
+      const emailRes = await mailsend(
+        email,
+        "Your Data send successfully",
+        contactUsEmail(email, firstname, lastname, message, phoneNo, countrycode)
+      )
+      console.log("Email Res ", emailRes)
+      return res.json({
+        success: true,
+        message: "Email send successfully",
+      })
+    } 
+    catch (error) {
+      console.log("Error", error)
+      console.log("Error message :", error.message)
+      return res.json({
+        success: false,
+        message: "Something went wrong...",
+      })
     }
 }
-
-
-
-
+  
 
 
 

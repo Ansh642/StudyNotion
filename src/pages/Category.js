@@ -14,7 +14,7 @@ export default function Category() {
 
     const [courses, setcourses] = useState([]);
     const [otherCourses, setotherCourses] = useState([]);
-    const {cart,setcart} = useContext(CartContext);
+    const {setcart} = useContext(CartContext);
 
     const courseArray = [courses];
 
@@ -67,10 +67,14 @@ export default function Category() {
                 
                 <button 
                  className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
-                 onClick={()=>{
-                  setcart([...cart,course]);
-                  localStorage.setItem('cart', JSON.stringify([...cart,course]));
-                  toast.success("Product Added Successfully") }}
+                 onClick={() => {
+                  setcart(prevCart => {
+                    const updatedCart = [...prevCart, course];
+                    localStorage.setItem('cart', JSON.stringify(updatedCart));
+                    toast.success("Product Added Successfully");
+                    return updatedCart;
+                  });
+                }}
                   >
                   Add to Cart
                 </button>
@@ -97,10 +101,14 @@ export default function Category() {
                 
                 <button 
                  className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
-                  onClick={()=>{
-                  setcart([...cart,course]);
-                  localStorage.setItem('cart', JSON.stringify([...cart,course]));
-                  toast.success("Product Added Successfully") }}>
+                 onClick={() => {
+                  setcart(prevCart => {
+                    const updatedCart = [...prevCart, course];
+                    localStorage.setItem('cart', JSON.stringify(updatedCart));
+                    toast.success("Product Added Successfully");
+                    return updatedCart;
+                  });
+                }}>
 
                   Add to Cart
                 </button>

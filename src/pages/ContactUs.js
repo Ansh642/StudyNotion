@@ -4,6 +4,7 @@ import { HiOutlineChatBubbleLeftEllipsis } from "react-icons/hi2";
 import countryCode from '../data/countrycode.json'
 import { IoIosCall } from "react-icons/io";
 import { FaGlobeAfrica } from "react-icons/fa";
+import Review from './Review';
 
 
 export default function ContactUs() {
@@ -104,7 +105,14 @@ export default function ContactUs() {
 
      </div>
 
+     <div className='flex flex-col w-11/12 gap-5 mt-20'>
+        <p className='text-3xl text-richblack-5 font-semibold mx-auto'>Review from other Learners</p>
+
+        <Review/>
+      </div>
      <Footer/>
+     
+     
 
     </div>
   )

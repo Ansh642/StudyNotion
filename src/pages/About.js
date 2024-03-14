@@ -5,7 +5,6 @@ import image3 from '../assets/Images/aboutus3.webp'
 import image4 from '../assets/Images/FoundingStory.png'
 
 import Footer from '../components/Footer'
-import ContactForm from './ContactForm'
 
 export default function About() {
   return (

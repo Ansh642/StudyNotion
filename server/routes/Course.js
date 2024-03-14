@@ -103,9 +103,7 @@ router.post("/getCategoryPageDetails", categoryPageDetails);
 //                                      Rating and Review
 // ********************************************************************************************************
 
-router.post("/createRating", function(req,res){
-    auth, isStudent, createRating
-} );
+router.post("/createRating", auth, isStudent, createRating);
 
 router.get("/getAverageRating", getAverageRating);
 

@@ -13,18 +13,14 @@ export default function Profile() {
   const [courses, setcourses] = useState([]);
   const [course, setcourse] = useState('All');
 
-
   useEffect( ()=>{
 
     const fetchData = async()=>{
       try{
   
-        const { data } = await axios.post("/api/v1/course/getAllCourses");
-  
-        setcourses(data.allCourses);
-        console.log(data.allCourses);
-        console.log("courses",courses);
-  
+        const { data } = await axios.post("/api/v1/course/getAllStudentCourses");
+
+        setcourses(data.data);
       }
       catch(err)
       {
@@ -104,7 +100,7 @@ export default function Profile() {
         <div className='bg-richblack-700 w-full h-12 rounded-xl mt-6'>
           <div className='text-richblack-100 flex flex-row gap-3 justify-between px-2 py-1 items-center mt-2 font-medium'>
             <p className='mr-3'>Course Name</p>
-            <p className=''>Duration</p>
+            <p className='ml-3'>Duration</p>
             <p className=''>Progress</p>
             <p className='mr-6'>Actions</p>
           </div>
@@ -115,24 +111,24 @@ export default function Profile() {
         courses?.map((course, index) => (
          <div key={index} className='text-white h-auto w-full flex flex-row items-center px-2'>
 
-           <div className='flex gap-3 w-[50%]'>
-            <img src={course.thumbnail} alt="" className='h-9 w-10 rounded-xl object-contain'/>
+           <div className='flex gap-3 w-[290px]'>
+            <img src={course.thumbnail} alt="" className='h-9 w-11 rounded-xl object-contain'/>
              <div className='flex flex-col text-sm'>
               <p className='font-semibold'>{course.courseName}</p>
               <p className='text-xs text-richblack-300'>{course.whatwillyoulearn}</p>
              </div>
            </div>
 
-           <div className='text-richblack-300 ml-20 items-start w-[20%]'>
+           <div className='text-richblack-300 ml-3 items-start w-[150px]'>
             2hr 30mins
            </div>
  
-           <div className=' w-[20%] ml-40 flex items-center' >
-           <Line percent={60} strokeWidth={7} strokeColor="#D3D3D3" />
+           <div className='w-[100px] ml-20 flex items-center' >
+           <Line percent={50} strokeWidth={7} strokeColor="#D3D3D3" />
            </div>
 
            <div>
-           <div className="w-[10%] ml-44 h-8 rounded-full bg-gray-300 flex flex-col gap-1 cursor-pointer items-center justify-center">
+           <div className=" ml-44 h-8 rounded-full bg-gray-300 flex flex-col gap-1 cursor-pointer items-center justify-center">
             {/* Three dots icon */}
             <div className="w-1 h-1 bg-richblack-300 rounded-full"></div>
             <div className="w-1 h-1 bg-richblack-300 rounded-full mx-1"></div>

@@ -17,6 +17,7 @@ import image3 from '../assets/Images/Compare_with_others.png'
 import '../App.css'
 import Footer from '../components/Footer';
 import { HomePageExplore } from '../data/homepage-explore';
+import Review from '../pages/Review'
 
 const timeline=[
     {
@@ -444,9 +445,7 @@ export default function Home() {
         <div className='flex flex-col w-11/12 gap-5 mt-16'>
             <p className='text-3xl text-richblack-5 font-semibold mx-auto'>Review from other Learners</p>
 
-            <div>
-              
-            </div>
+            <Review/>
         </div>
 
         </div>

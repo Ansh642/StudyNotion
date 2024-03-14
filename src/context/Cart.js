@@ -3,7 +3,7 @@ export const CartContext = createContext();
 
 export function CartProvider({children}){
 
-    const [cart, setcart] = useState([1]);
+    const [cart, setcart] = useState([]);
 
     const fetchProduct =()=>{
         let existingProduct = localStorage.getItem('cart');
