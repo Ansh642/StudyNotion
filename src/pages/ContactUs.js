@@ -1,13 +1,62 @@
-import React from 'react'
+import {React,useState} from 'react'
 import Footer from '../components/Footer'
 import { HiOutlineChatBubbleLeftEllipsis } from "react-icons/hi2";
 import countryCode from '../data/countrycode.json'
 import { IoIosCall } from "react-icons/io";
 import { FaGlobeAfrica } from "react-icons/fa";
 import Review from './Review';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 export default function ContactUs() {
+
+  const [formData, setFormData] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    message: '',
+    phoneNo: '',
+    countryCode: '+91' // Default country code
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  async function submitHandler(e){
+    e.preventDefault();
+    try{
+      const response = await axios.post('/api/v1/auth/contact-us',{
+        email : formData.email,
+        firstname : formData.firstName,
+        lastname : formData.lastName,
+        message : formData.message,
+        phoneNo : formData.phoneNo,
+        countryCode : formData.countryCode,
+      });
+
+      if(response.data.success)
+      {
+        toast.success("Your response has been received");
+        setFormData({
+          email: '',
+          firstName: '',
+          lastName: '',
+          message: '',
+          phoneNo: '',
+          countryCode: '+91' 
+        });
+      }
+    }
+    catch(err){
+      console.log(err.message);
+    }
+  }
 
   return (
 
@@ -53,55 +102,37 @@ export default function ContactUs() {
       </div>
 
       {/* Contact Us form */}
-      <div className=' bg-richblack-900 w-[45%] h-[580px] rounded-2xl border-[1px] border-richblack-400'>
+      <form onSubmit={submitHandler} className=' bg-richblack-900 w-[45%] h-[580px] rounded-2xl border-[1px] border-richblack-400'>
+          <div className='w-[90%] h-[90%] mx-auto flex flex-col py-2 px-5 mt-5'>
+            <p className='text-3xl font-semibold w-full'>Got an Idea? We've got the skills. Let's Team Up.</p>
+            <p className='text-sm mt-2 text-richblack-500'>Tell us more about yourself and what have you got in mind</p>
 
-      <div className='w-[90%] h-[90%] mx-auto flex flex-col py-2 px-5 mt-5'>
+            <div className='flex flex-row gap-3 mt-8'>
+              <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder='Enter First Name' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-[65%] rounded-md border-none'/> 
+              <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder='Enter Last Name' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-[65%] rounded-md border-none'/> 
+            </div>
 
-        <p className='text-3xl font-semibold w-full'>Got an Idea? We've got the skills. Let's Team Up.</p>
-        <p className='text-sm mt-2 text-richblack-500'>Tell us more about yourself and what have you got in mind</p>
+            <div className='flex flex-row gap-3 mt-5'>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Enter Your Email' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-full rounded-md border-none'/>
+            </div>
 
-        
-      <div className='flex flex-row gap-3 mt-8'>
-          <input type="text" name="firstName"  placeholder='Enter First Name' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-[65%] rounded-md border-none'/> 
-          <input type="text" name="lastName"  placeholder='Enter Last Name' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-[65%] rounded-md border-none'/> 
-      </div>
+            <div className='flex flex-row gap-3 mt-5 w-full'>
+              <select name="countryCode" value={formData.countryCode} onChange={handleChange} className='w-[25%] pl-2 px-1 py-2 bg-richblack-800 outline-none rounded-md text-richblack-50 cursor-pointer'>
+                {countryCode.map((ele, index) => (
+                  <option key={index} value={ele.code}>{ele.code} - {ele.country}</option>
+                ))}
+              </select>
 
-      <div className='flex flex-row gap-3 mt-5'>
-          <input type="email" name="email" placeholder='Enter Your Email' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-full rounded-md border-none'/>
-      </div>
+              <input type="text" name="phoneNo" value={formData.phoneNo} onChange={handleChange} placeholder='Enter Your Number' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-[380px] rounded-md border-none'/>
+            </div>
 
+            <textarea name="message" value={formData.message} onChange={handleChange} cols="22" rows="4" className='bg-richblack-800 mt-7 outline-none rounded-xl py-2 px-2' placeholder='Enter Your Message..'/>
 
-      <div className='flex flex-row gap-3 mt-5 w-full'>
-      
-      <select className=' w-[25%] pl-2 px-1 py-2 bg-richblack-800 outline-none rounded-md text-richblack-50 cursor-pointer'>
-      {
-      countryCode.map( (ele,index) => {
-      return (
-          <option key={index} selected={ele.code ==='+91'}>
-          <p>{ele.code} - {ele.country}</p>
-          </option>
-      )}
-      )}
-      </select>
-
-      <div>
-      <input type="text" name="phoneNo"  placeholder='Enter Your Number' className='pl-2 outline-none px-1 py-2 bg-richblack-800 w-[380px] rounded-md border-none'/>
-      </div>
-
-      </div>
-
-
-      <textarea name="" id="" cols="22" rows="4"  className='bg-richblack-800 mt-7 outline-none rounded-xl py-2 px-2' placeholder='Enter Your Message..'/>
-
-
-      <button className='bg-yellow-50 hover:bg-yellow-200 hover:transition-all duration-200 px-2 mt-8 py-2 text-richblack-900 rounded-md'>
-      Send Message
-    </button>
-    
-
-      </div>
-
-      </div>
+            <button type='submit' className='bg-yellow-50 hover:bg-yellow-200 hover:transition-all duration-200 px-2 mt-8 py-2 text-richblack-900 rounded-md'>
+              Send Message
+            </button>
+          </div>
+        </form>
 
      </div>
 

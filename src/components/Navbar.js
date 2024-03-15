@@ -45,7 +45,6 @@ export default function Navbar() {
     e.preventDefault();
 
     localStorage.removeItem("auth");
-    localStorage.removeItem("cart");
     setauth({
       ...auth,
       user:null,

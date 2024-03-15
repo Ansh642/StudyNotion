@@ -68,7 +68,7 @@ export default function Cart() {
 
 
                  <div className='flex flex-col w-[15%] text-sm gap-2 text-white'>
-                   <button className='bg-richblack-700 flex gap-2 items-center px-3 py-2 rounded-lg text-pink-200' onClick={() => removeItem(item._id)}>Remove <RiDeleteBin5Fill /></button>
+                   <button className='bg-richblack-700 flex gap-2 items-center px-3 py-2 rounded-lg text-pink-200 hover:bg-richblack-800 transition-all duration-200' onClick={() => removeItem(item._id)}>Remove <RiDeleteBin5Fill /></button>
                    <p className='text-yellow-50 ml-2 font-semibold text-lg font-inter'>Rs. {item.price}/-</p>
                  </div>
 

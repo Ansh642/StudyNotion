@@ -14,7 +14,7 @@ export default function Category() {
 
     const [courses, setcourses] = useState([]);
     const [otherCourses, setotherCourses] = useState([]);
-    const {setcart} = useContext(CartContext);
+    const {cart,setcart} = useContext(CartContext);
 
     const courseArray = [courses];
 

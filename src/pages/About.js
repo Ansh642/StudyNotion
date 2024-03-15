@@ -3,7 +3,7 @@ import image1 from '../assets/Images/aboutus1.webp'
 import image2 from '../assets/Images/aboutus2.webp'
 import image3 from '../assets/Images/aboutus3.webp'
 import image4 from '../assets/Images/FoundingStory.png'
-
+import Review from './Review';
 import Footer from '../components/Footer'
 
 export default function About() {
@@ -101,10 +101,10 @@ export default function About() {
       {/* <ContactForm/> */}
 
       {/* section 4 */}
-      <div className='flex flex-col gap-5 mt-20'>
-        <p className='mx-auto text-3xl font-semibold font-inter'>Review From other Learners</p>
+      <div className='flex flex-col w-11/12 gap-5 mt-20'>
+        <p className='text-3xl text-richblack-5 font-semibold mx-auto'>Review from other Learners</p>
 
-
+        <Review/>
       </div>
 
       <Footer/>
