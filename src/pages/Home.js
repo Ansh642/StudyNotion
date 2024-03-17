@@ -95,7 +95,7 @@ export default function Home() {
 
             <div className='flex gap-6 mt-8'>
 
-            <Link to='/signup'>
+            <Link to='/dashboard/all-courses'>
             <button className='bg-yellow-50 px-7 py-2 rounded-lg text-black font-inter text-[15px]
             hover:scale-95 transition-all duration-200 text-center'>Try It Yourself</button>
             </Link>

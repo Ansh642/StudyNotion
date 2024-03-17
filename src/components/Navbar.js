@@ -78,7 +78,7 @@ export default function Navbar() {
                 <p>{ele.title}</p>
                 <GoChevronDown />
     
-                <div className='invisible z-40 w-[190px] absolute left-[50%] -top-[13%] gap-1 translate-x-[-50%] translate-y-[80%] flex flex-col  rounded-md bg-richblack-800 p-4 text-richblack-5 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100'>
+                <div className='invisible z-40 w-[190px] absolute left-[51%] -top-[13%] gap-1 translate-x-[-50%] translate-y-[80%] flex flex-col  rounded-md bg-richblack-800 p-4 text-richblack-5 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100'>
                   {
                     links.map ( (ele,index) =>{
                       return (
@@ -112,8 +112,6 @@ export default function Navbar() {
               
               (<>
                 
-                <CiSearch className='text-white cursor-pointer' size={20}/>
-
                 <Link to='/dashboard/cart' className='text-white relative'>
                   <FiShoppingBag size={20}/>
                    {

@@ -11,8 +11,7 @@ exports.createSubSection= async(req,res)=>{
         const {sectionId, title,description} = req.body;
         const videoUrl = req.files.videoUrl;
 
-       
-         
+    
         if(!sectionId || !title || !description || !videoUrl){
             return res.status(400).json({
                 success: false,

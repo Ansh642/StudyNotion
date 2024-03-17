@@ -8,7 +8,8 @@ const router = express.Router();
 const {createCourse,
     getAllCourses,
     getCourseDetails,
-    studentCourses} = require("../controllers/course")
+    studentCourses,
+    deleteCourse} = require("../controllers/course")
 
 // Categories Controllers Import
 const { showAllCategories,
@@ -42,11 +43,9 @@ router.post("/createCourse",
     auth, isInstructor, createCourse);
 
 //Add a Section to a Course
-router.post("/addSection",
-    auth,
-    isInstructor,
-    createSection);
+router.post("/addSection",auth,isInstructor,createSection);
 
+//router.post("/addSection/:id",auth,isInstructor,createSection);
 
 // Update a Section
 router.post("/updateSection", function(req,res){
@@ -84,6 +83,8 @@ router.post("/getAllStudentCourses",auth, studentCourses);
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", getCourseDetails);
 
+router.post('/deleteCourse',deleteCourse);
+
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)
@@ -91,8 +92,7 @@ router.post("/getCourseDetails", getCourseDetails);
 // Category can Only be Created by Admin
 // TODO: Put IsAdmin Middleware here
 
-router.post("/createCategory" , 
-    auth, isAdmin, createCategory);
+router.post("/createCategory" , auth, isAdmin, createCategory);
 
 router.get("/showAllCategories", showAllCategories);
 

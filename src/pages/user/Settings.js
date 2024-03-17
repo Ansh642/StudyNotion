@@ -195,7 +195,7 @@ export default function Profile() {
 
         </div>
 
-        <div className='w-full h-56 py-3 mt-4 rounded-xl bg-richblack-800 px-4 flex flex-row items-center'>
+        <div className='w-full h-60 py-3 mt-4 rounded-xl bg-richblack-800 px-4 flex flex-row items-center'>
 
           <div className='flex flex-col text-richblack-5 gap-4 px-3'>
 
@@ -205,22 +205,12 @@ export default function Profile() {
 
             <div className='flex flex-row gap-7 w-full'>
 
-              <div className='flex flex-col gap-1 w-full'>
-               <span className='text-sm text-richblack-200'>Date of Birth</span>
-               <input
-                type="date" id="datePicker" name="datePicker" value={dateOfBirth} onChange={profileChangeHandler} className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'/>
+            <div className='flex flex-col gap-1 w-full'>
+               <span className='text-sm text-richblack-200'>About</span>
+               <textarea type="text" cols={2} rows={2} name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full text-richblack-200' placeholder='Write about Yourself'/>
+            </div>
 
-              </div>
-
-              <div className='flex flex-col gap-1 w-full'>
-              <span className='text-sm text-richblack-200'>Gender</span>
-                <select name="gender" value={gender} onChange={profileChangeHandler} className=' bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
-                  <option value="Male" > Male</option>
-                  <option value="Female" >Female</option>
-                  <option value="Prefer Not to say" > Prefer Not To Say</option>
-                </select>
-              </div>
-
+            
             </div>
 
             <div className='flex flex-row gap-7 w-full'>
@@ -231,10 +221,14 @@ export default function Profile() {
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
-               <span className='text-sm text-richblack-200'>About</span>
-               <input type="text" name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full' placeholder='Enter about Yourself'/>
+              <span className='text-sm text-richblack-200'>Gender</span>
+                <select name="gender" value={gender} onChange={profileChangeHandler} className=' bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
+                  <option value="" selected>Select Gender</option>
+                  <option value="Male" > Male</option>
+                  <option value="Female" >Female</option>
+                  <option value="Prefer Not to say" > Prefer Not To Say</option>
+                </select>
               </div>
-
             
             </div>
 

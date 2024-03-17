@@ -5,7 +5,10 @@ const Course = require('../models/course');
 exports.createSection = async(req,res)=>{
 
     // fetch details and update course
-    const {sectionName , courseId} = req.body;
+    const {sectionName} = req.body;
+    const {courseId} = req.body || req.params.id;
+
+    console.log(courseId);
     
     if(!sectionName || !courseId){
         return res.status(400).json({

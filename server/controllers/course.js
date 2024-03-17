@@ -178,3 +178,15 @@ exports.studentCourses = async(req,res)=>{
         });
     }
 }
+
+
+exports.deleteCourse = async(req,res)=>{
+    try{
+        const {courseId} = req.body;
+        console.log(courseId);
+        
+    }
+    catch(err){
+
+    }
+}

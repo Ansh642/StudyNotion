@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import { CourseContext } from '../../context/Course';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
  
 export default function CourseBuilder() {
     
@@ -18,8 +18,11 @@ export default function CourseBuilder() {
   const navigate = useNavigate();
   
   const {course,setcourse} = useContext(CourseContext);
+
+  const location = useLocation();
+
   
-  const courseId = course?.courseDetails?._id;
+  const courseId = course?.courseDetails?._id  || location.pathname.split('/')[-1];
 
   const handler= async(data)=>{
 

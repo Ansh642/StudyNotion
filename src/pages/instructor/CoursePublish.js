@@ -49,6 +49,8 @@ export default function CoursePublish() {
           sectionDetails :null
         })
         navigate('/dashboard/my-courses');
+        localStorage.removeItem('courseDetails');
+        localStorage.removeItem('sectionDetails');
       }
       else
       {

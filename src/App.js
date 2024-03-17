@@ -57,6 +57,7 @@ function App() {
           <Route path="my-courses" element={<Mycourses/>} />
           <Route path="new-course" element={<NewCourse/>} />
           <Route path="new-course-continue" element={<CourseBuilder/>} />
+          <Route path="new-course-continue/:id" element={<CourseBuilder/>} />
           <Route path="new-course-final" element={<CoursePublish/>} />
           <Route path="instructor-settings" element={<InstructorSettings/>}/>
 

@@ -205,19 +205,12 @@ export default function InstructorSettings() {
 
             <div className='flex flex-row gap-7 w-full'>
 
-              <div className='flex flex-col gap-1 w-full'>
-               <span className='text-sm text-richblack-200'>Date of Birth</span>
-               <input type="date" name="dateOfBirth" id="" value={profileChangeHandler} onChange={changeHandler} className='bg-richblack-700 outline-none rounded-md px-5 py-1 cursor-pointer'/>
-              </div>
+            <div className='flex flex-col gap-1 w-full'>
+               <span className='text-sm text-richblack-200'>About</span>
+               <textarea type="text" cols={2} rows={2} name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full text-richblack-200' placeholder='Write about Yourself'/>
+            </div>
 
-              <div className='flex flex-col gap-1 w-full'>
-              <span className='text-sm text-richblack-200'>Gender</span>
-                <select name="gender" value={gender} onChange={profileChangeHandler} className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
-                  <option value="Male" > Male</option>
-                  <option value="Female" >Female</option>
-                  <option value="Prefer Not to say" > Prefer Not To Say</option>
-                </select>
-              </div>
+              
 
             </div>
 
@@ -229,8 +222,12 @@ export default function InstructorSettings() {
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
-               <span className='text-sm text-richblack-200'>About</span>
-               <input type="text" name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full' placeholder='Enter about Yourself'/>
+              <span className='text-sm text-richblack-200'>Gender</span>
+                <select name="gender" value={gender} onChange={profileChangeHandler} className='bg-richblack-700 outline-none px-4 py-[6.7px] rounded-md cursor-pointer'>
+                  <option value="Male" > Male</option>
+                  <option value="Female" >Female</option>
+                  <option value="Prefer Not to say" > Prefer Not To Say</option>
+                </select>
               </div>
 
             
