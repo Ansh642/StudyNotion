@@ -7,8 +7,6 @@ exports.createSection = async(req,res)=>{
     // fetch details and update course
     const {sectionName} = req.body;
     const {courseId} = req.body || req.params.id;
-
-    console.log(courseId);
     
     if(!sectionName || !courseId){
         return res.status(400).json({

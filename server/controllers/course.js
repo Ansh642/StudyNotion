@@ -180,11 +180,28 @@ exports.studentCourses = async(req,res)=>{
 }
 
 
-exports.deleteCourse = async(req,res)=>{
+exports.unenrollCourse = async(req,res)=>{
     try{
-        const {courseId} = req.body;
-        console.log(courseId);
-        
+      const {courseId} = req.body;
+      const userId = req.user.id;
+
+      const userDetails = await User.findByIdAndUpdate(userId,{
+        $pull:{
+            courses: courseId,
+        }
+      });
+
+      if(!userDetails){
+        return res.status(404).json({
+            success:false,
+            message: "Course not found",
+        });
+      }
+      return res.status(200).json({
+        success:true,
+        message: "Course Unenrolled successfully",
+      });
+
     }
     catch(err){
 

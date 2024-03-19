@@ -15,7 +15,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const [courses, setcourses] = useState([]);
   const [course, setcourse] = useState('All');
-  const [courseId, setcourseId] = useState();
+  const [courseId, setcourseId] = useState("");
   
 
   const [reviewData, setReviewData] = useState({
@@ -80,12 +80,32 @@ export default function Profile() {
       if(response.data.success) {
         toast.success("Review added successfully");
         setaddreview(false);
+        setcourseId("");
       }
     }
     catch(err){
       console.log(err.message);
     }
   }
+
+  async function unerollHandler(e){
+    setaction(false);
+    try{
+      const response = await axios.post('/api/v1/course/unenroll',{
+        courseId:courseId,
+      });
+
+      if(response.data.success) {
+        toast.success("Course Unenrolled successfully");
+        setcourseId("");
+      }
+    }
+    catch(err){
+      console.log(err.message);
+    }
+  }
+
+  console.log(courseId);
 
 
   return (
@@ -167,7 +187,7 @@ export default function Profile() {
            </div>
 
            <div onClick={()=>setaction(!action)}>
-           <div className="relative ml-44 h-8 rounded-full text-richblack-400 flex flex-col gap-1 cursor-pointer items-center justify-center hover:text-white">
+           <div className="relative ml-44 h-8 rounded-full text-richblack-400 flex flex-col gap-1 cursor-pointer items-center justify-center hover:text-white" onClick={()=>setcourseId(course._id)}>
             {/* Three dots icon */}
             <div className="w-1 h-1 bg-richblack-300 rounded-full"></div>
             <div className="w-1 h-1 bg-richblack-300 rounded-full mx-1"></div>
@@ -187,7 +207,7 @@ export default function Profile() {
       {/* Review Section */}
       <div className={`absolute bg-richblack-800 top-[245px]  right-[343px] flex flex-col h-fit w-28 rounded-lg px-1 py-2 ${action===true  ? `visible transition-all duration-100` : `invisible`}`}>
         <p className='text-richblack-5 ml-5 hover:text-yellow-25 cursor-pointer text-lg font-inter capitalize' onClick={()=>{setaddreview(true);setaction(false)}}>Review  </p>
-        <p className='text-richblack-5 ml-4  hover:text-yellow-25 cursor-pointer text-lg font-inter capitalize'>Unenroll </p>
+        <p className='text-richblack-5 ml-4  hover:text-yellow-25 cursor-pointer text-lg font-inter capitalize'onClick={()=>unerollHandler()}>Unenroll </p>
       </div>
 
 
@@ -251,10 +271,6 @@ export default function Profile() {
     </div>
   )
 }
-
-
-
-
 
 
 

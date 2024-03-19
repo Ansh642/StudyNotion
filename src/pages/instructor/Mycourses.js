@@ -46,15 +46,6 @@ export default function Mycourses() {
     fetchData();
   },[]);
 
-  async function deleteHandler(id){
-    try{
-
-    }
-    catch(err){
-
-    }
-  }
-
   async function editHandler(id){
     navigate(`/dashboard/new-course-continue/:${id}`);
   }
@@ -131,9 +122,8 @@ export default function Mycourses() {
             {course.price}
            </div>
 
-            <div className=' flex gap-3 ml-40 w-[17%] cursor-pointer'>
+            <div className=' flex gap-3 ml-44 w-[10%] cursor-pointer'>
               <MdOutlineModeEdit className='text-richblack-300 hover:text-white' size={18} onClick={()=>editHandler(course._id)}/>
-              <RiDeleteBin6Fill className='text-richblack-300 hover:text-white' size={18} onClick={()=>deleteHandler(course._id)}/>
             </div>
            
 

@@ -4,6 +4,7 @@ import { AppContext } from '../../context/Profile';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import '../../App.css'
+import { CartContext } from '../../context/Cart';
 
 export default function AllCourses() {
 
@@ -11,7 +12,7 @@ export default function AllCourses() {
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
   const [courses, setcourses] = useState([]);
-
+  const {cart,setcart} = useContext(CartContext);
 
   useEffect( ()=>{
 
@@ -103,7 +104,16 @@ export default function AllCourses() {
                 <span className=" font-semibold text-white">Rs. {course.price} /-</span>
                 
                 <button 
-                 className="bg-blue-500 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+                 className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
+                 onClick={() => {
+                  setcart(prevCart => {
+                    const updatedCart = [...prevCart, course];
+                    localStorage.setItem('cart', JSON.stringify(updatedCart));
+                    toast.success("Product Added Successfully");
+                    return updatedCart;
+                  });
+                }}
+                  >
                   Add to Cart
                 </button>
               </div>

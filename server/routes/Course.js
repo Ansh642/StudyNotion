@@ -9,7 +9,8 @@ const {createCourse,
     getAllCourses,
     getCourseDetails,
     studentCourses,
-    deleteCourse} = require("../controllers/course")
+    deleteCourse,
+    unenrollCourse} = require("../controllers/course")
 
 // Categories Controllers Import
 const { showAllCategories,
@@ -39,34 +40,19 @@ const { auth,
     isAdmin } = require("../middlewares/middleware");
 
 // Courses can Only be Created by Instructors
-router.post("/createCourse", 
-    auth, isInstructor, createCourse);
+router.post("/createCourse", auth, isInstructor, createCourse);
 
 //Add a Section to a Course
 router.post("/addSection",auth,isInstructor,createSection);
-
-//router.post("/addSection/:id",auth,isInstructor,createSection);
-
-// Update a Section
-router.post("/updateSection", function(req,res){
-    auth, isInstructor, updateSection
-});
-
 
 // Delete a Section
 router.post("/deleteSection", auth, isInstructor, deleteSection);
 
 
 // Edit Sub Section
-router.post("/updateSubSection", (req,res)=>{
-    auth, isInstructor, updateSubSection
-} )
+router.post("/updateSubSection" ,auth, isInstructor, updateSubSection)
 
-
-// Delete Sub Section
-router.post("/deleteSubSection", (req,res)=>{
-    auth, isInstructor, deleteSubSection
-} );
+router.post("/unenroll",auth, unenrollCourse);
 
 
 // Add a Sub Section to a Section
@@ -82,8 +68,6 @@ router.post("/getAllStudentCourses",auth, studentCourses);
 
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", getCourseDetails);
-
-router.post('/deleteCourse',deleteCourse);
 
 
 // ********************************************************************************************************
