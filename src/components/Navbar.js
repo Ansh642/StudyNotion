@@ -8,13 +8,12 @@ import { CartContext } from '../context/Cart';
 import { GoChevronDown } from "react-icons/go";
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { CiSearch } from "react-icons/ci";
 
 export default function Navbar() {
 
   const [select, setselect] = useState('Home');
   const {auth,setauth} = useContext(AppContext);
-  const {cart,setcart} = useContext(CartContext);
+  const {cart} = useContext(CartContext);
   const [show, setshow] = useState(false);
 
   const navigate = useNavigate();
@@ -108,7 +107,7 @@ export default function Navbar() {
           {
             auth.token ? (<>
             {
-              auth.user.accountType === "student" ? 
+              auth?.user?.accountType === "student" ? 
               
               (<>
                 
@@ -148,7 +147,7 @@ export default function Navbar() {
                 <div className="flex items-center cursor-pointer"  >
                 
                   <img
-                    src={auth.user.image}  
+                    src={auth.user?.image}  
                     alt=""
                     className="rounded-full h-6 w-6 object-contain"
                     onClick={()=>setshow(true)}

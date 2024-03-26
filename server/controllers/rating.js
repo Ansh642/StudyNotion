@@ -117,10 +117,9 @@ exports.getAverageRating = async(req,res)=>{
 exports.getAllRatingReview = async (req,res)=>{
 
     try{
-    // get all ratings
     const allRating = await Rating.find({}).populate({
         path: "course",
-        select: "courseName -_id" // Specify the fields you want to select and exclude _id
+        select: "courseName -_id" // Specify the fields you want to select and exclude the id
     }).populate({
         path : "user",
         select: "firstName lastName image email -_id" 
