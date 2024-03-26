@@ -23,6 +23,7 @@ export default function Profile() {
     review: ""
   });
 
+  
   const { rating, review } = reviewData;
 
   const handleInputChange = (event) => {
