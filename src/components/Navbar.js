@@ -65,7 +65,7 @@ export default function Navbar() {
           <img src={logo} alt="" width={160} height={42} loading='lazy'/>
         </Link>
 
-        <div className='text-white flex flex-row items-center justify-center mx-auto gap-3'>
+        {/* <div className='text-white flex flex-row items-center justify-center mx-auto gap-3'>
         {
           NavbarLinks.map ( (ele,index)=>{
             return(
@@ -101,7 +101,7 @@ export default function Navbar() {
             )
           })
         }
-        </div>
+        </div> */}
 
         <div className='flex flex-row gap-5 items-center'>
           {
