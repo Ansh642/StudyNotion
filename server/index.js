@@ -26,7 +26,7 @@ app.use(cookieParser());
 // connecting frontend and backend
 app.use(
     cors({
-        origin: 'study-notion-three-chi.vercel.app',
+        origin: "*",
         credentials : true,
     })
 );
