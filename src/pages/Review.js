@@ -15,7 +15,6 @@ export default function Review() {
 
         if(response.data.success)
         {
-          console.log(response.data.allRating);
           setreviews(response.data.allRating);
         }
 

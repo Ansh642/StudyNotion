@@ -14,12 +14,10 @@ export default function VerifyEmail() {
   // Refs for each input block
   const inputRefs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
 
-  // Function to handle OTP input changes for each block
   const handleOtpChange = (index, value) => {
-    // Allow only numeric input
+    
     const sanitizedInput = value.replace(/\D/g, '');
 
-    // Update the corresponding block with the sanitized input
     setOtpBlocks((prevBlocks) => {
       const newBlocks = [...prevBlocks];
       newBlocks[index] = sanitizedInput.slice(0, 1); // Limit to one digit
