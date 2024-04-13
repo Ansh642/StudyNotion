@@ -29,7 +29,7 @@ export default function Login() {
   async function handleOnSubmit(e){
     e.preventDefault();
     try{
-      const { data } = await axios.post ('/api/v1/auth/login',{
+      const { data } = await axios.post ('https://studynotion-2-qsjg.onrender.com/api/v1/auth/login',{
         email,
         password
       });
