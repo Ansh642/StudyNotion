@@ -30,7 +30,7 @@ export default function CourseBuilder() {
     form.append('sectionName',data.sectionName);
 
     try{
-      const response = await axios.post('/api/v1/course/addSection',{
+      const response = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/course/addSection',{
       sectionName: data.sectionName,
       courseId,
     });

@@ -30,7 +30,7 @@ export default function Profile() {
   const profileHandler = async(e)=>{
     e.preventDefault();
     try{
-      const response = await axios.put('/api/v1/profile/updateProfile',{
+      const response = await axios.put('https://studynotion-2-qsjg.onrender.com/api/v1/profile/updateProfile',{
         gender,
         contactNumber,
         about,
@@ -70,7 +70,7 @@ export default function Profile() {
     e.preventDefault();
     try{
 
-      const {response} = await axios.post('/api/v1/auth/changepassword',{
+      const {response} = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/auth/changepassword',{
         oldPassword,
         newPassword,
       });
@@ -114,7 +114,7 @@ export default function Profile() {
 
   async function deleteHandler(){
     try{
-      const response = await axios.delete('/api/v1/profile/deleteProfile');
+      const response = await axios.delete('https://studynotion-2-qsjg.onrender.com/api/v1/profile/deleteProfile');
 
       if(response.data.success)
       {

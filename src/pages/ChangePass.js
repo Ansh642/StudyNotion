@@ -19,7 +19,7 @@ export default function ChangePass() {
     console.log(token);
 
     try{
-     const { data } = await axios.post("/api/v1/auth/reset-password",{
+     const { data } = await axios.post("https://studynotion-2-qsjg.onrender.com/api/v1/auth/reset-password",{
         password,
         confirmPassword,
         token

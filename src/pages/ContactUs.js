@@ -31,7 +31,7 @@ export default function ContactUs() {
   async function submitHandler(e){
     e.preventDefault();
     try{
-      const response = await axios.post('/api/v1/auth/contact-us',{
+      const response = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/auth/contact-us',{
         email : formData.email,
         firstname : formData.firstName,
         lastname : formData.lastName,

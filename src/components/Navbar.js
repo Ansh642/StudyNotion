@@ -24,7 +24,7 @@ export default function Navbar() {
 
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get('/api/v1/course/showAllCategories');
+      const { data } = await axios.get('https://studynotion-2-qsjg.onrender.com/api/v1/course/showAllCategories');
       setLinks(data.allCategory || []);
     } catch (err) {
       console.log(err.message);

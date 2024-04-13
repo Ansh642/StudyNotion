@@ -12,7 +12,7 @@ export default function InstructorPrivate() {
   useEffect(() => {
     const authCheck = async () => {
 
-      const res = await axios.get("/api/v1/auth/instructor-auth");
+      const res = await axios.get("https://studynotion-2-qsjg.onrender.com/api/v1/auth/instructor-auth");
     
       if (res.data.ok) {
         setOk(true);

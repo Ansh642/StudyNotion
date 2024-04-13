@@ -29,7 +29,7 @@ export default function CoursePublish() {
     form.append('videoUrl',data.videoUrl[0]);
 
     try{
-      const response = await axios.post('/api/v1/course/addSubSection', {
+      const response = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/course/addSubSection', {
         title: data.title,
         description: data.description,
         videoUrl: data.videoUrl[0],

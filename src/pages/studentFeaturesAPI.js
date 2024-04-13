@@ -31,7 +31,7 @@ export async function buyCourse(courses, userDetails, navigate) {
         }
 
         //initiate the order
-        const orderResponse = await axios.post('/api/v1/payment/capturePayment',{
+        const orderResponse = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/payment/capturePayment',{
             courses
         });
 
@@ -77,7 +77,7 @@ export async function buyCourse(courses, userDetails, navigate) {
 
 async function sendPaymentSuccessEmail(response, amount, token) {
     try{
-        await axios.post('/api/v1/payment/sendPaymentSuccessEmail', {
+        await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/payment/sendPaymentSuccessEmail', {
             orderId: response.razorpay_order_id,
             paymentId: response.razorpay_payment_id,
             amount,
@@ -94,7 +94,7 @@ async function verifyPayment(bodyData, navigate) {
     const toastId = toast.loading("Verifying Payment....");
 
     try{
-        const response  = await axios.post('/api/v1/auth/payment/verifySignature',{
+        const response  = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/auth/payment/verifySignature',{
             bodyData,
         });
 

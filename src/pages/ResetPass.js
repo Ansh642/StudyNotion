@@ -13,7 +13,7 @@ export default function ResetPass() {
   const handler =async(e)=>{
     e.preventDefault();
     try{
-      const {data} = await axios.post("/api/v1/auth/reset-password-token",{
+      const {data} = await axios.post("https://studynotion-2-qsjg.onrender.com/api/v1/auth/reset-password-token",{
         email
       });
 

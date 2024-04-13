@@ -19,7 +19,7 @@ export default function AllCourses() {
     const fetchData = async()=>{
       try{
   
-        const { data } = await axios.post("/api/v1/course/getAllCourses");
+        const { data } = await axios.post("https://studynotion-2-qsjg.onrender.com/api/v1/course/getAllCourses");
   
         setcourses(data.allCourses);
         console.log(data.allCourses);

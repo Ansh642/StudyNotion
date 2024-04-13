@@ -23,7 +23,7 @@ export default function CourseInf() {
   useEffect(() => {
     const fetchCategories =async()=>{
       try{
-        const { data } = await axios.get("/api/v1/course/showAllCategories");
+        const { data } = await axios.get("https://studynotion-2-qsjg.onrender.com/api/v1/course/showAllCategories");
         //console.log(data.allCategory);
         setcategories(data.allCategory);
       
@@ -50,7 +50,7 @@ export default function CourseInf() {
     form.append('image',data.image[0]);
 
     try{
-      const response = await axios.post('/api/v1/course/createCourse', form, {
+      const response = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/course/createCourse', form, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

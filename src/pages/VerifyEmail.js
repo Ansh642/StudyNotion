@@ -47,7 +47,7 @@ export default function VerifyEmail() {
   async function handleSumbit(e){
     e.preventDefault();
     try{
-        const {data} = await axios.post("/api/v1/auth/signup",{
+        const {data} = await axios.post("https://studynotion-2-qsjg.onrender.com/api/v1/auth/signup",{
             email,
             password,
             confirmPassword,
@@ -67,7 +67,7 @@ export default function VerifyEmail() {
                 signup : null,
                 
             });
-            //localStorage.removeItem("signup");
+           
         }
         else{
             toast.error("Signup failed");

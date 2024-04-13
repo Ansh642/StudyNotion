@@ -35,7 +35,7 @@ export default function Signup() {
     e.preventDefault();
     try{
     
-      const {data} = await axios.post("/api/v1/auth/sendotp",{
+      const {data} = await axios.post("https://studynotion-2-qsjg.onrender.com/api/v1/auth/sendotp",{
         email,
       });
 

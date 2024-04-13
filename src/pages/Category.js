@@ -21,7 +21,7 @@ export default function Category() {
     useEffect( ()=>{
         const fetchCourses=async()=>{
             try{
-              const response  = await axios.post('/api/v1/course/getCategoryPageDetails',{
+              const response  = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/course/getCategoryPageDetails',{
                 name
               });
 

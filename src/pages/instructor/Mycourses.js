@@ -32,7 +32,7 @@ export default function Mycourses() {
   const fetchData = async()=>{
     try{
 
-      const { data } = await axios.post("/api/v1/course/getAllStudentCourses");
+      const { data } = await axios.post("https://studynotion-2-qsjg.onrender.com/api/v1/course/getAllStudentCourses");
       setcourses(data.data);
 
     }

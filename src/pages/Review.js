@@ -11,7 +11,7 @@ export default function Review() {
 
    const fetchReviews =async()=>{
       try{
-        const response = await axios.get('/api/v1/course/getReviews');
+        const response = await axios.get('https://studynotion-2-qsjg.onrender.com/api/v1/course/getReviews');
 
         if(response.data.success)
         {
