@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Cart() {
 
   const {cart,setcart} = useContext(CartContext);
-  const {auth,setauth} = useContext(AppContext);
+  const {auth} = useContext(AppContext);
 
   function removeItem(id) {
     try {
@@ -26,7 +26,7 @@ export default function Cart() {
 
   function totalPrice(){
     let total=0;
-    cart.forEach(element => {
+    cart?.forEach(element => {
       total = total + element.price
       
     });
@@ -44,7 +44,7 @@ export default function Cart() {
     <div className='flex flex-col  w-11/12 mt-7 ml-40'>
       <p className='font-semibold text-3xl text-richblack-5'>My Cart</p>
 
-      <p className='text-richblack-300 mt-16 text-lg'>{cart.length} Courses in Cart.</p>
+      <p className='text-richblack-300 mt-16 text-lg'>{cart?.length} Courses in Cart.</p>
       <p className='w-[82%] h-[0.5px] bg-richblack-800 mt-1'></p>
 
       <div className='flex flex-row gap-6 mt-3'>
@@ -53,7 +53,7 @@ export default function Cart() {
         {
           <div className='flex ml-2 flex-col gap-7 px-3 py-3 justify-evenly mt-1'>
           {
-            cart.map ( (item)=>{
+            cart?.map ( (item)=>{
               return (
                 <div key={item._id} className='flex flex-row gap-6'>
 

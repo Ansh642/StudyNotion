@@ -92,14 +92,14 @@ export default function CourseInf() {
   return (
     <div>
 
-    <div className=' flex gap-4 justify-center bg-richblack-900 mb-20 h-screen overflow-y-scroll'>
+    <div className=' flex gap-4 justify-center bg-richblack-900 mb-16 h-[1000px] overflow-y-scroll'>
 
     {/* form div */}
     <div className='w-[60%] h-72 flex flex-col gap-2'>
         <p className='text-3xl text-white mt-4'>Add New Course</p>
 
         {/* Form div */}
-      <form className=' bg-richblack-800 py-5 px-4 flex flex-col rounded-md gap-7 mt-4' onSubmit={handleSubmit(handler)}>
+      <form className=' bg-richblack-800 py-7 px-4 flex flex-col rounded-md gap-7 mt-4' onSubmit={handleSubmit(handler)}>
 
         <div className='flex flex-col text-richblack-5'>
           <label className='ml-1'>Course Title<sup className='text-brown-400'>*</sup></label>
@@ -166,7 +166,7 @@ export default function CourseInf() {
 
 
     {/* box div */}
-    <div className='w-[24%] h-80 rounded-lg bg-richblack-800 py-4 px-2 mt-6 text-white'>
+    <div className='w-[24%] h-80 rounded-lg bg-richblack-800 py-4 px-2 mt-[75px] text-white'>
 
       <div className='text-xl font-inter flex gap-1'>
         <p className='flex items-center text-yellow-5'><BsLightningFill /></p>

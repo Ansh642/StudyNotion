@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 
 export default function Navbar() {
   const [select, setSelect] = useState('Home');
-  const { auth, setAuth } = useContext(AppContext);
+  const { auth, setauth } = useContext(AppContext);
   const { cart } = useContext(CartContext);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function Navbar() {
     e.preventDefault();
 
     localStorage.removeItem('auth');
-    setAuth({
+    setauth({
       ...auth,
       user: null,
       token: '',

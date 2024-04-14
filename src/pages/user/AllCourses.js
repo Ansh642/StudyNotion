@@ -12,7 +12,7 @@ export default function AllCourses() {
   const [show, setshow] = useState(false);
   const navigate = useNavigate();
   const [courses, setcourses] = useState([]);
-  const {cart,setcart} = useContext(CartContext);
+  const {setcart} = useContext(CartContext);
 
   useEffect( ()=>{
 
@@ -107,12 +107,18 @@ export default function AllCourses() {
                  className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
                  onClick={() => {
                   setcart(prevCart => {
-                    const updatedCart = [...prevCart, course];
+                    // Parse existing cart items from localStorage or initialize as an empty array
+                    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+                    // Add the new course to the existing cart items
+                    const updatedCart = [...existingCart, course];
+                    // Update localStorage with the updated cart items
                     localStorage.setItem('cart', JSON.stringify(updatedCart));
+                    // Update state with the updated cart items
                     toast.success("Product Added Successfully");
                     return updatedCart;
                   });
                 }}
+                
                   >
                   Add to Cart
                 </button>

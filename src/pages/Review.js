@@ -1,64 +1,72 @@
 import axios from 'axios';
-import React, { useEffect,useState } from 'react'
-import ReactStars from 'react-stars'
-import '../App.css'
+import React, { useEffect, useState } from 'react';
+import ReactStars from 'react-stars';
+import '../App.css';
 
 export default function Review() {
+  const [reviews, setReviews] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
 
-  const [reviews, setreviews] = useState([]);
-
-  useEffect( ()=>{
-
-   const fetchReviews =async()=>{
-      try{
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
         const response = await axios.get('https://studynotion-2-qsjg.onrender.com/api/v1/course/getReviews');
-
-        if(response.data.success)
-        {
-          setreviews(response.data.allRating);
+        if (response.data.success) {
+          setReviews(response.data.allRating);
         }
-
-      }
-      catch(err){
+      } catch (err) {
         console.log(err.message);
       }
-    }
+    };
 
     fetchReviews();
-  },[]);
-  return (
-    <div className='w-11/12 flex flex-row gap-10 mx-auto items-center justify-center mt-4 mb-6'>
-      {
-        reviews.map ( (review,index)=>{
-          return (
-            <div key={index}>
-             <div className='bg-richblack-800 w-60 px-3 py-3 rounded-lg h-52 flex flex-col gap-2'>
+  }, []);
 
-                <div className='flex flex-row gap-2 items-center h-[30%]'>
-                  <img src={review.user.image} alt="" className='w-9 h-9 rounded-full' />
+  const nextSlide = () => {
+    setStartIndex((prevIndex) => Math.min(prevIndex + 4, reviews.length - 1));
+  };
+
+  const prevSlide = () => {
+    setStartIndex((prevIndex) => Math.max(prevIndex - 4, 0));
+  };
+
+  return (
+    <div className='mx-auto w-[95%] items-center justify-center mt-6 mb-10'>
+
+      <div className='slider-container flex items-center justify-center'>
+        <button onClick={prevSlide} className='prev-button mr-7 '>&#10094;</button>
+
+        <div className='slider grid grid-cols-4 gap-8'>
+          {reviews.slice(startIndex, startIndex + 4).map((review, index) => (
+            <div key={index} className='slide'>
+
+              <div className='bg-richblack-800 h-52 w-60 px-3 py-4 rounded-lg flex flex-col gap-4'>
+
+                <div className='flex flex-row gap-2 h-10 items-center'>
+                  <img src={review.user.image} alt='' className='w-9 h-9 rounded-full' />
+
                   <div className='flex flex-col'>
                     <p className='text-richblack-100'>{review.user.firstName} {review.user.lastName}</p>
                     <p className='text-richblack-500 text-sm'>{review.user.email}</p>
                   </div>
+
                 </div>
 
-
-                <div className='text-richblack-300 w-[97%] h-[50%]'>
+                <div className='text-richblack-300 h-32'>
                   {review.review}
                 </div>
 
-                <div className='h-[20%]'>
-                  <ReactStars count={review.rating} size={30} color1={'#FFE83D'} />
+                <div>
+                  <ReactStars count={review.rating} size={30} className='h-10' color1={'#FFE83D'} />
                 </div>
-
               </div>
-            </div>
-          )
-        })
-      }
-    </div>
 
-    
-    
-  )
+            </div>
+          ))}
+        </div>
+
+        <button onClick={nextSlide} className='next-button ml-7'>&#10095;</button>
+      </div>
+    </div>
+  );
 }

@@ -72,7 +72,7 @@ export default function Profile() {
     e.preventDefault();
 
     try{
-      const response = await axios.post('/api/v1/course/createRating',{
+      const response = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/course/createRating',{
        rating,
        review,
        courseId:courseId
@@ -92,7 +92,7 @@ export default function Profile() {
   async function unerollHandler(e){
     setaction(false);
     try{
-      const response = await axios.post('/api/v1/course/unenroll',{
+      const response = await axios.post('https://studynotion-2-qsjg.onrender.com/api/v1/course/unenroll',{
         courseId:courseId,
       });
 
