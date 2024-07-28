@@ -54,11 +54,7 @@ export default function Category() {
         <p className='ml-16 text-richblack-100 w-[85%] mt-1'>{name} is a high-level, interpreted programming language known for its simplicity and readability. It offers dynamic typing and automatic memory management, making it ideal for rapid application development and scripting. Python's extensive standard library and thriving community contribute to its versatility and popularity in various domains, including web development.</p>
     </div>
 
-<<<<<<< HEAD
-    <div className="w-[90%] mx-auto py-8 ">
-=======
     <div className="w-11/12 mx-auto py-8 ">
->>>>>>> 9b47e7bcfd35e4af736940eeb7fac147a6ad8af7
       <h2 className="text-3xl font-inter mb-4 flex items-center justify-start text-richblack-5">Courses related to {name}</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
@@ -105,11 +101,7 @@ export default function Category() {
     </div>
 
 
-<<<<<<< HEAD
     <div className="w-[90%] mx-auto py-8">
-=======
-    <div className="w-11/12 mx-auto py-8">
->>>>>>> 9b47e7bcfd35e4af736940eeb7fac147a6ad8af7
       <h2 className="text-3xl font-inter mb-4 flex items-center justify-start text-richblack-5">Other Courses</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-6">
