@@ -99,7 +99,7 @@ export default function Navbar() {
                   <nav className="bg-gray-800">
                     <div className="flex items-center justify-between" onClick={() => setShow(!show)}>
                       <div className="flex items-center cursor-pointer">
-                        <img src={auth.user.image} alt="" className="rounded-full h-6 w-6 object-contain" onClick={() => setShow(!show)} />
+                        <img src={auth.user.image} alt="" className="rounded-full h-7 w-7 object-contain" onClick={() => setShow(!show)} />
                       </div>
                     </div>
                     <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show === true ? `visible` : `invisible`}`}>
@@ -113,7 +113,7 @@ export default function Navbar() {
                   <nav className="bg-gray-800 mr-20">
                     <div className="flex items-center justify-between" onClick={() => setShow(!show)}>
                       <div className="flex items-center cursor-pointer">
-                        <img src={auth.user?.image} alt="" className="rounded-full h-6 w-6 object-contain" onClick={() => setShow(true)} />
+                        <img src={auth.user?.image} alt="" className="rounded-full h-7 w-7 object-contain" onClick={() => setShow(true)} />
                       </div>
                     </div>
                     <div className={`w-24 h-16 bg-richblack-800 z-auto absolute rounded-lg px-1 py-1 visible top-10 cursor-pointer ${show === true ? `visible` : `invisible`}`}>

@@ -1,7 +1,7 @@
 import React, { useContext,useState,useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/Profile';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { MdOutlineModeEdit } from "react-icons/md";

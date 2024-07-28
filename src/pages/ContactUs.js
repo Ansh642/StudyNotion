@@ -6,7 +6,7 @@ import { IoIosCall } from "react-icons/io";
 import { FaGlobeAfrica } from "react-icons/fa";
 import Review from './Review';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 
 export default function ContactUs() {

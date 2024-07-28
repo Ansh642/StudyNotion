@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Footer from '../components/Footer';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { CartContext } from '../context/Cart';
+import { AppContext } from '../context/Profile';
 
 
 export default function Category() {
@@ -15,6 +16,7 @@ export default function Category() {
     const [courses, setcourses] = useState([]);
     const [otherCourses, setotherCourses] = useState([]);
     const {setcart} = useContext(CartContext);
+    const {auth} = useContext(AppContext);
 
     const courseArray = [courses];
 
@@ -52,7 +54,7 @@ export default function Category() {
         <p className='ml-16 text-richblack-100 w-[85%] mt-1'>{name} is a high-level, interpreted programming language known for its simplicity and readability. It offers dynamic typing and automatic memory management, making it ideal for rapid application development and scripting. Python's extensive standard library and thriving community contribute to its versatility and popularity in various domains, including web development.</p>
     </div>
 
-    <div className="container mx-auto py-8 ">
+    <div className="w-[90%] mx-auto py-8 ">
       <h2 className="text-3xl font-inter mb-4 flex items-center justify-start text-richblack-5">Courses related to {name}</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
@@ -68,18 +70,25 @@ export default function Category() {
                 <button 
                  className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
                  onClick={() => {
-                  setcart(prevCart => {
-                    // Parse existing cart items from localStorage or initialize as an empty array
-                    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-                    // Add the new course to the existing cart items
-                    const updatedCart = [...existingCart, course];
-                    // Update localStorage with the updated cart items
-                    localStorage.setItem('cart', JSON.stringify(updatedCart));
-                    // Update state with the updated cart items
-                    toast.success("Product Added Successfully");
-                    return updatedCart;
-                  });
+                  // Check if the user is logged in
+                  if (auth.user === null) {
+                    toast.error("Please log in to add items to the cart");
+                    return
+                  } else {
+                    setcart(prevCart => {
+                      // Parse existing cart items from localStorage or initialize as an empty array
+                      const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+                      // Add the new course to the existing cart items
+                      const updatedCart = [...existingCart, course];
+                      // Update localStorage with the updated cart items
+                      localStorage.setItem('cart', JSON.stringify(updatedCart));
+                      // Update state with the updated cart items
+                      toast.success("Product Added Successfully");
+                      return updatedCart;
+                    });
+                  }
                 }}
+                
                 
                   >
                   Add to Cart
@@ -92,7 +101,7 @@ export default function Category() {
     </div>
 
 
-    <div className="container mx-auto py-8">
+    <div className="w-[90%] mx-auto py-8">
       <h2 className="text-3xl font-inter mb-4 flex items-center justify-start text-richblack-5">Other Courses</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-6">
@@ -108,13 +117,26 @@ export default function Category() {
                 <button 
                  className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
                  onClick={() => {
-                  setcart(prevCart => {
-                    const updatedCart = [...prevCart, course];
-                    localStorage.setItem('cart', JSON.stringify(updatedCart));
-                    toast.success("Product Added Successfully");
-                    return updatedCart;
-                  });
-                }}>
+                  // Check if the user is logged in
+                 
+                  if (auth.user===null) {
+                    toast.error("Please log in to add items to the cart");
+                    return
+                  } else {
+                    setcart(prevCart => {
+                      // Parse existing cart items from localStorage or initialize as an empty array
+                      const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+                      // Add the new course to the existing cart items
+                      const updatedCart = [...existingCart, course];
+                      // Update localStorage with the updated cart items
+                      localStorage.setItem('cart', JSON.stringify(updatedCart));
+                      // Update state with the updated cart items
+                      toast.success("Product Added Successfully");
+                      return updatedCart;
+                    });
+                  }
+                }}
+                >
 
                   Add to Cart
                 </button>

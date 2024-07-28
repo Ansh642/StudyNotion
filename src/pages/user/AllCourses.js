@@ -1,7 +1,7 @@
 import React, { useContext,useEffect,useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/Profile';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import '../../App.css'
 import { CartContext } from '../../context/Cart';
@@ -106,18 +106,24 @@ export default function AllCourses() {
                 <button 
                  className="bg-blue-400 place-content-end text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-all duration-200"
                  onClick={() => {
-                  setcart(prevCart => {
-                    // Parse existing cart items from localStorage or initialize as an empty array
-                    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-                    // Add the new course to the existing cart items
-                    const updatedCart = [...existingCart, course];
-                    // Update localStorage with the updated cart items
-                    localStorage.setItem('cart', JSON.stringify(updatedCart));
-                    // Update state with the updated cart items
-                    toast.success("Product Added Successfully");
-                    return updatedCart;
-                  });
+                  // Check if the user is logged in
+                  if (!auth) {
+                    toast.error("Please log in to add items to the cart");
+                  } else {
+                    setcart(prevCart => {
+                      // Parse existing cart items from localStorage or initialize as an empty array
+                      const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+                      // Add the new course to the existing cart items
+                      const updatedCart = [...existingCart, course];
+                      // Update localStorage with the updated cart items
+                      localStorage.setItem('cart', JSON.stringify(updatedCart));
+                      // Update state with the updated cart items
+                      toast.success("Product Added Successfully");
+                      return updatedCart;
+                    });
+                  }
                 }}
+                
                 
                   >
                   Add to Cart

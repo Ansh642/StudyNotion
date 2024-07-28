@@ -31,7 +31,7 @@ export default function Review() {
   };
 
   return (
-    <div className='mx-auto w-[95%] items-center justify-center mt-6 mb-10'>
+    <div className='mx-auto w-[95%] mr-2 items-center justify-center mt-6 mb-10'>
 
       <div className='slider-container flex items-center justify-center'>
         <button onClick={prevSlide} className='prev-button mr-7 '>&#10094;</button>

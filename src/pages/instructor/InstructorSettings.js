@@ -1,7 +1,7 @@
 import React, { useContext,useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/Profile';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 
 export default function InstructorSettings() {
@@ -207,7 +207,7 @@ export default function InstructorSettings() {
 
             <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>About</span>
-               <textarea type="text" cols={2} rows={2} name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full text-richblack-200' placeholder='Write about Yourself'/>
+               <textarea cols={2} rows={2} name="about" value={about} onChange={profileChangeHandler} className='bg-richblack-700 px-3 rounded-md outline-none py-1 w-full text-richblack-200' placeholder='Write about Yourself'/>
             </div>
 
               
@@ -251,12 +251,12 @@ export default function InstructorSettings() {
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>Current Password</span>
-               <input type="password" name="oldPassword" id="oldpassword" value={oldPassword} onChange={changeHandler} className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Enter Your Current Password'/>
+               <input type="password" name="oldPassword" id="oldpassword" value={oldPassword} onChange={changeHandler} className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Current Password'/>
               </div>
 
               <div className='flex flex-col gap-1 w-full'>
                <span className='text-sm text-richblack-200'>New Password</span>
-               <input type="password" name="newPassword" id="newpassword" value={newPassword} onChange={changeHandler} className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='Enter your New Password'/>
+               <input type="password" name="newPassword" id="newpassword" value={newPassword} onChange={changeHandler} className='bg-richblack-700 px-4 rounded-md outline-none py-1 w-full' placeholder='New Password'/>
               </div>
 
             </div>

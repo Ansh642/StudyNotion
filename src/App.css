@@ -14,8 +14,8 @@ html, body{
 }
 
 .ansh{
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 .review-slider-container {

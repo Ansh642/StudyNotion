@@ -23,11 +23,12 @@ import CourseBuilder from "./pages/instructor/CourseBuilder";
 import CoursePublish from "./pages/instructor/CoursePublish";
 import Category from "./pages/Category";
 import AllCourses from "./pages/user/AllCourses";
+import { Toaster } from "react-hot-toast";
 import "./App.css";
 
 function App() {
   return (
-    <div className="bg-richblack-900 min-h-screen w-screen flex flex-col font-inter">
+    <div className="bg-richblack-900 min-h-screen w-screen flex flex-col font-inter ansh">
 
       <Navbar/>
       <Routes>
@@ -65,6 +66,8 @@ function App() {
 
 
       </Routes>
+
+      <Toaster/>
       
     </div>
 

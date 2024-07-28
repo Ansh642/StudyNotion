@@ -3,7 +3,7 @@ import { BsLightningFill } from "react-icons/bs";
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import { CourseContext } from '../../context/Course';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
  
 export default function CourseBuilder() {

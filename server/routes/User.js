@@ -41,10 +41,8 @@ router.post("/changepassword",auth, changePassword);
 //                                      Reset Password
 // ********************************************************************************************************
 
-// Route for generating a reset password token
 router.post("/reset-password-token", resetPasswordToken)
 
-// Route for resetting user's password after verification
 router.post("/reset-password", resetPassword)
 
 router.post("/contact-us",contactUs);
@@ -54,10 +52,9 @@ router.get("/user-auth", auth, (req, res) => {
   res.status(200).send({ ok: true });
 });
 
-router.get("/instructor-auth", auth,isInstructor, (req, res) => {
+router.get("/instructor-auth", auth, isInstructor, (req, res) => {
   res.status(200).send({ ok: true });
 });
 
-// Export the router for use in the main application
 module.exports = router
 

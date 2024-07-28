@@ -3,7 +3,7 @@ import LoginImg from '../assets/Images/signup.webp'
 import { useState } from 'react';
 import countryCode from '../data/countrycode.json'
 import axios from 'axios';
-import {toast} from 'react-toastify'
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/Profile';
 

@@ -1,7 +1,7 @@
 import {React ,useState}from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 
 export default function ChangePass() {
