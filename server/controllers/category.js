@@ -31,24 +31,27 @@ exports.createCategory = async(req,res)=>{
 }
 
 
-exports.showAllCategories = async (req, res) => {
-    try {
-        const allCategories = await Category.find({}, { name: 1, description: 1, _id: 0 });
+exports.showAllCategories=async(req,res)=>{
+    try{
+        const allCategory = await Category.find({},{
+            name:true,
+            description:true,
+        });
 
-        return res.status(200).json({
+        return res.status(200).send({
             success: true,
             message: 'Categories returned successfully',
-            data: allCategories,
-        });
-    } catch (err) {
-        console.error("Error fetching categories:", err);
-        return res.status(500).json({
-            success: false,
-            message: "An error occurred while displaying all categories",
-            error: err.message,
+            allCategory,
         });
     }
-};
+ 
+    catch(err){
+        return res.status(500).json({
+            success: false,
+            message:"An error occurred while displaying all categories",
+        });
+    }
+}
 
 
 exports.categoryPageDetails = async (req,res)=>{
