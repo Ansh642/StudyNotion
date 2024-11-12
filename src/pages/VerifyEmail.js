@@ -62,15 +62,13 @@ export default function VerifyEmail() {
             toast.success("Signup successful");
             navigate("/login");
             setauth({
-                ...auth,
-                account :null,
-                signup : null,
-                
-            });
-           
+              ...auth,
+              account :null,
+              signup : null,
+          });
         }
         else{
-            toast.error("Signup failed");
+          toast.error("Signup failed");
         }
     }
     catch(err){

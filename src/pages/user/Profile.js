@@ -119,7 +119,7 @@ export default function Profile() {
                 <p>{auth.user.email}</p>
               </div>
 
-              <div className='flex flex-col gap-1 ml-28'>
+              <div className='flex flex-col gap-1 ml-[105px]'>
                 <p className='text-richblack-500'>Phone Number</p>
                 <p>{auth?.user?.additionalDetails?.contactNumber}</p>
               </div>

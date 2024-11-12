@@ -74,7 +74,12 @@ export default function Category() {
                   if (auth.user === null) {
                     toast.error("Please log in to add items to the cart");
                     return
-                  } else {
+                  } 
+                  
+                  else if( auth.user.accountType==='instructor'){
+                    toast.error("Instructor cannot add courses");
+                  }
+                  else {
                     setcart(prevCart => {
                       // Parse existing cart items from localStorage or initialize as an empty array
                       const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
